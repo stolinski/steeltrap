@@ -1,8 +1,36 @@
 <% layout('../layout') -%>
 
-<h2>Active Clients</h2>
+<h2>Clients</h2>
 
+<a class="btn" href="/clients/new/">Add New Client</a>
+
+<h3>Active</h3>
   <% clients.forEach(function(client){ %>
+  <article class="client-container <%= client.active? 'active' : 'not-active'%>">
+    <div class="client-details">
+      <h3 class="client-name"><%= client.name %></h3>
+      <h5 class="client-contact"><%= client.contact %></h5>
+      <form class="client-edit-form" action="clients/<%= client.slug %>/edit" method="post">
+        <input value="<%= client.name? client.name : '' %>" type="text" name="name" placeholder="Client Name" />
+        <input value="<%= client.contact? client.contact : '' %>" type="text" name="contact" placeholder="Contact Name" />
+        <input value="<%= client.email? client.email : '' %>" type="text" name="email" placeholder="Contact Email" />
+        <label>Active: <input type="checkbox" name="active" <%= client.active? "checked" : "" %>/><label>
+        <input type="submit" value="Save"/>
+      </form>
+    </div>
+    <div class="client-email">
+      <span class="client-email-link" href="mailto:<%= client.email %>"><%= client.email %></span>
+      <a class="client-email-icon" href="mailto:<%= client.email %>"><i class="fa fa-envelope"></i></a>
+    </div>
+    <span class="client-edit-btn" href="/clients/<%= client.slug %>/edit"><i class="fa fa-pencil"></i></span>
+  </article>
+  <% }); %>
+
+<h3>In-Active</h3>
+  <% iaclients.forEach(function(client){ %>
+  <article class="client-container <%= client.active? 'active' : 'not-active'%>">
     <h3 class="client-name"><%= client.name %></h3>
     <h5 class="client-contact"><%= client.contact %> <a href="mailto:<%= client.email %>"><i class="fa fa-envelope"></i></a></h5>
+    <span class="client-edit-btn" href="/clients/<%= client.slug %>/edit"><i class="fa fa-pencil"></i></span>
+  </article>
   <% }); %>

@@ -1,7 +1,7 @@
 <form method="post">
-  <input type="text" name="name" placeholder="Client Name" />
-  <input type="text" name="contact" placeholder="Contact Name" />
-  <input type="text" name="email" placeholder="Contact Email" />
-  <input type="checkbox" name"active" />
+  <input value="<%= _client.name? _client.name : '' %>" type="text" name="name" placeholder="Client Name" />
+  <input value="<%= _client.contact? _client.contact : '' %>" type="text" name="contact" placeholder="Contact Name" />
+  <input value="<%= _client.email? _client.email : '' %>" type="text" name="email" placeholder="Contact Email" />
+  <input type="checkbox" name="active" <%= _client.active? "checked" : "" %>/>
   <input type="submit" />
 </form>

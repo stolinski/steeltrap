@@ -12,11 +12,11 @@ var mongoose = require('mongoose'),
  */
 
 var ClientSchema = new Schema({
-  name: String,
+  name: {type:String, required: true },
   slug: String,
   contact: String,
   email: String,
-  Active: Boolean,
+  active: {type: Boolean, default: true },
 });
 
 

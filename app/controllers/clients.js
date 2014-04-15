@@ -18,8 +18,15 @@ var Client = mongoose.model('Client');
  */
 
 exports.index = function (req, res) {
-  Client.find(function(err, clients) {
-    res.render('clients', {clients:clients});
+  Client.find({ active: true },function(err, clients) {
+    if (req.url.indexOf('/json') > -1) return res.send(clients); // json
+    
+    Client.find({ active: false }, function (err, iaclients) {
+      if (err) return handleError(err);
+      res.locals.iaclients = iaclients;
+      return res.render('clients', {clients:clients});
+    });
+    
   });
 };
 
@@ -56,16 +63,13 @@ exports.new = function (req, res, next) {
  */
 
 exports.edit = function (req, res, next) {
-  Q.ninvoke(Client, 'findOne', { slug: req.params.slug })
-    .then(function (client) {
-      if (!client) return next(); // 404
-      res.locals._client = client;
-      return res.render('clients/edit'); // html
-    })
-    .fail(function (err) {
-      return next(err); // 500
-    });
+  Client.findOne({ 'slug': req.params.slug }, function (err, client) {
+    if (!client) return next();
+    res.locals._client = client;
+    return res.render('clients/edit'); // html
+  });
 };
+
 
 /**
  * Create
@@ -73,17 +77,15 @@ exports.edit = function (req, res, next) {
  */
 
 exports.create = function (req, res, next) {
-  console.log(req.body);
   var client = new Client(req.body);
+  client.active = req.body.active == undefined ? false : true;
   client.save( function( err) {
     if( !err ) {
-      console.log('created');
       return res.redirect('/clients');
     } else {
       console.log( err );
     }
   });
-
 };
 
 
@@ -94,75 +96,32 @@ exports.create = function (req, res, next) {
  */
 
 exports.update = function (req, res, next) {
-  Q.fcall(Image.update, Client, { slug: req.params.slug }, 'image', req.body.image, req.files.image)
-    .then(function (update) {
-      return update; // update image
-    })
-    .then(function (updateData) {
-      return Q.ninvoke(Client, 'findOne', { slug: req.params.slug });
-    })
-    .then(function (client) {
-      if (!client) return next(); // 404
-      client = _.extend(client, _.omit(req.body, 'image'));
-      return Q.ninvoke(client, 'save');
-    })
-    .then(function () {
-      req.flash('success', msg.client.updated(req.body.title));
-      return res.redirect('/clients'); // html
-    })
-    .fail(function (err) {
-      var vErr = validationErrors(err);
-      if (!vErr) return next(err); // 500 
-      req.flash('error', vErr);
-      return res.redirect('/clients/' + req.params.slug + '/edit'); // html
+  Client.findOne({ 'slug': req.params.slug }, function (err, client) {
+    client.name = req.body.name;
+    client.contact = req.body.contact;
+    client.email = req.body.email;
+    client.active = req.body.active === undefined ? false : true;
+    client.save( function( err ) {
+      if( !err ) {
+        return res.redirect('/clients');
+      } else {
+        console.log( err );
+      }
+    }); 
+  });
+};
+
+
+exports.delete = function (req, res, next) {
+    return Client.findById( req.params.id, function( err, client ) {
+        return client.remove( function( err ) {
+            if( !err ) {
+                console.log( 'Client Removed' );
+                return response.send( '' );
+            } else {
+                console.log( err );
+            }
+        });
     });
 };
 
-/**
- * changeLog index
- * GET /clients/:slug/log
- */
-
-exports.log = function (req, res, next) {
-  Q.ninvoke(Client.index, 'findOne', { slug: req.params.slug })
-    .then(function (client) {
-      if (!client) return next(); // 404
-      res.locals._client = client;
-      return res.render('clients/log'); // html
-    })
-    .fail(function (err) {
-      return next(err); // 500
-    });
-};
-
-/**
- * changeLog restore
- * GET /clients/:slug/log/:__v/restore
- */
- 
-exports.restore = function (req, res, next) {
-  Q.ninvoke(Client.index, 'findOne', { slug: req.params.slug })
-    .then(function (client) {
-      if (!client || !client.changeLog[req.params.__v]) return next(); // 404
-      var image = client.changeLog[req.params.__v].data.image;
-      return Image.restore(Client, { slug: req.params.slug }, 'image', image);
-    })
-    .then(function () {
-      return Q.ninvoke(Client.index, 'findOne', { slug: req.params.slug });
-    })
-    .then(function (client) {
-      if (!client) return next(); // 404
-      var data = _.omit(client.changeLog[req.params.__v].data, '__v', 'image');
-      data._meta = req.body._meta;
-      client = _.extend(client, data);
-      res.locals._client = client;
-      return Q.ninvoke(client, 'save');
-    })
-    .then(function () { 
-      req.flash('success', msg.client.restored(res.locals._client.title, req.params.__v));
-      return res.redirect('/clients'); // html
-    })
-    .fail(function (err) {
-      return next(err); // 500
-    });
-};

@@ -43,5 +43,4 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 require('./config/routes')(app);
 
 
-
 app.listen(4666);

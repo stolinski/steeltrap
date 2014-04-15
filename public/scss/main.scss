@@ -44,3 +44,106 @@ body {
   color:#333;
   font-family: 'Lato', sans-serif;
 }
+
+.header {
+  @include clearfix;
+  background: $dark; 
+  color:#eee;
+  padding:20px 10%;
+  span {
+    display: block;
+    float: left;
+    margin-top: 20px;
+  }
+}
+
+.site-title {
+  float: left;
+  margin:0 20px 0 0;
+  font-weight: 300;
+}
+
+.site-nav {
+  float: right;
+  ul {
+    li {
+      float: left;
+      @include fs(18px);
+      a {
+        display: block;
+        text-decoration: none;
+        color:#eee;
+      }
+      & + li {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+main {
+  padding:40px 10%;
+}
+
+
+.client-container {
+  position: relative;
+  width: 50%;
+  padding: 10px;
+  background: white;
+  margin-bottom: 10px;
+  @include clearfix;
+  @include border-radius(5px);
+  &.not-active {
+    opacity: 0.5;
+  }
+  .client-details {
+    float: left;
+  }
+
+  .client-email {
+    float: right;
+    text-align: right;
+    @include trans;
+    .client-email-icon {
+      @include fs(32px);
+      color: $dark-red;
+      display: block;
+      &:hover {
+        color:$red;
+      }
+    }
+    .client-email-link {
+      text-decoration: none;
+    }
+  }
+  .client-edit-btn {
+    opacity: 0;
+    @include fs(18px);
+    position: absolute;
+    bottom: 8px;
+    right: 15px;
+    color: $gray;
+  }
+  &:hover {
+    .client-edit-btn {
+      opacity: 1;
+    }
+  }
+  .client-edit-form {
+    input {
+      width: 100%;
+      display: block;
+      margin-bottom: 5px;
+      border: dashed 2px #eee;
+    }
+    input[type='checkbox'] {
+      display: inline-block;
+    }
+  }
+}

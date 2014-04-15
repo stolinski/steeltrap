@@ -19,4 +19,5 @@ module.exports = function(app, passport) {
   app.get('/clients/:slug/json', clients.show);
   app.get('/clients/:slug/edit', clients.edit);
   app.post('/clients/:slug/edit', clients.update);
+  app.get('/clients/:id/delete', clients.delete);
 };

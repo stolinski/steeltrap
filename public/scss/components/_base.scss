@@ -47,3 +47,14 @@ ol {
     margin-bottom: 10px;
   }
 }
+
+.btn {
+  background:$dark-blue;
+  color: white;
+  text-decoration: none;
+  padding:5px;
+  margin-bottom: 20px;
+  display: inline-block;
+  @include border-radius(5px);
+  @include fs(24px);  
+}
