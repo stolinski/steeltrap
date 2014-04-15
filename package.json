@@ -7,7 +7,8 @@
     "mongoose": "~3.5.5",
     "underscore": "*",
     "ejs": "~0.7.1",
-    "ejs-locals": "latest"
+    "ejs-locals": "latest",
+    "body-parser" : "latest"
     },
   "devDependencies": {
     "gulp-jshint": "~1.4.0",

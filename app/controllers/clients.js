@@ -17,16 +17,10 @@ var Client = mongoose.model('Client');
  * GET /clients/json
  */
 
-exports.index = function (req, res, next) {
-  Q.ninvoke(Client.index, 'find')
-    .then(function (clients) {
-      res.locals.clients = clients;
-      if (req.url.indexOf('/json') > -1) return res.send(stripMongoIds(clients)); // json
-      return res.render('clients'); // html
-    })
-    .fail(function (err) {
-      return next(err); // 500
-    });
+exports.index = function (req, res) {
+  Client.find(function(err, clients) {
+    res.render('clients', {clients:clients});
+  });
 };
 
 /**
@@ -38,17 +32,12 @@ exports.index = function (req, res, next) {
  */
 
 exports.show = function (req, res, next) {
-  Q.ninvoke(Client, 'findOne', { slug: req.params.slug })
-    .then(function (client) {
-      if (!client) return next(); // 404
-      res.locals._client = ( req.params.__v && client.changeLog[req.params.__v] ? _.extend(client, client.changeLog[req.params.__v].data) : client );
-      if (req.url.indexOf('/json') > -1) return res.send(stripMongoIds(res.locals._client)); // json
-      return res.render('clients/show'); // html
-    })
-    .fail(function (err) {
-      return next(err); // 500
-    });
+  Client.findOne({ 'slug': req.params.slug }, function (err, client) {
+    if (err) return handleError(err);
+    return res.render('clients/show', {client:client}); // html
+  });
 };
+
 
 /**
  * New
@@ -56,19 +45,9 @@ exports.show = function (req, res, next) {
  */
 
 exports.new = function (req, res, next) {
-  Q.fcall(function () {
-    var clients = req.flash('client');
-    return ( clients && clients.length && clients[clients.length-1] ? clients[clients.length-1] : new Client() );
-  })
-    .then(function (client) {
-      res.locals._client = client; // use '_client' because 'client' namespace is occupied, and modifying it will break jade
-      return res.render('clients/new', { 
-        pageHeading: 'Create Client'
-      }); // html
-    })
-    .fail(function (err) {
-      return next(err); // 500
-    });
+  var client = new Client();
+  res.locals._client = client;
+  return res.render('clients/new');
 };
 
 /**
@@ -94,33 +73,20 @@ exports.edit = function (req, res, next) {
  */
 
 exports.create = function (req, res, next) {
+  console.log(req.body);
   var client = new Client(req.body);
-  client.image = Image.create(client.image, req.files.image);
-
-  var _image = [];
-  client.image.forEach(function (img) {
-    _image.push(Image.promiseImageMeta(img.sysPathRetina));
+  client.save( function( err) {
+    if( !err ) {
+      console.log('created');
+      return res.redirect('/clients');
+    } else {
+      console.log( err );
+    }
   });
 
-  Q.all(_image)
-    .then(function (metaArray) {
-      metaArray.forEach(function (meta, key) {
-        client.image[key].meta = Image.filterImageMeta(meta);
-      });
-      return Q.ninvoke(client, 'save');
-    })
-    .then(function () {
-      req.flash('success', msg.client.created(client.title));
-      return res.redirect('/clients'); // html
-    })
-    .fail(function (err) {
-      var vErr = validationErrors(err);
-      if (!vErr) return next(err); // 500
-      req.flash('error', vErr);
-      req.flash('client', client);
-      return res.redirect('/clients/new'); // html
-    });
 };
+
+
 
 /**
  * Update

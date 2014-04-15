@@ -1,0 +1,46 @@
+/*------------------------------------*\
+    $TABLE OF CONTENTS
+\*------------------------------------*/
+
+/**
+ * Imports................Brings in Compass, Toolkit, Breakpoint, Reset, Susy2, Mixins, Variables and Components
+ * Components.............Site Components 
+ * * Base.................Base Element Styles
+ * * Typography...........Base Type Styles
+ * Sections...............Page Sections
+ */
+
+
+
+
+
+/*------------------------------------*\
+    $IMPORTS
+\*------------------------------------*/
+
+@import "fontawesome/variables";
+@import "fontawesome/mixins";
+@import "fontawesome/path";
+@import "fontawesome/core";
+@import "fontawesome/larger";
+@import "fontawesome/fixed-width";
+@import "fontawesome/list";
+@import "fontawesome/bordered-pulled";
+@import "fontawesome/spinning";
+@import "fontawesome/rotated-flipped";
+@import "fontawesome/stacked";
+@import "fontawesome/icons";
+
+@import "compass";
+@import "toolkit";
+@import "breakpoint";
+@import 'mixins';
+@import 'vars';
+@import "reset";
+@import 'components/**/*';
+
+body {
+  background: #eee;
+  color:#333;
+  font-family: 'Lato', sans-serif;
+}

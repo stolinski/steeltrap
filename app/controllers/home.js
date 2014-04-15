@@ -19,6 +19,5 @@ var Client = mongoose.model('Client');
  */
 
 exports.index = function (req, res, next) {
-  console.log("on home bitches");
   return res.render('home');
 };

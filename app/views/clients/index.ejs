@@ -1,0 +1,8 @@
+<% layout('../layout') -%>
+
+<h2>Active Clients</h2>
+
+  <% clients.forEach(function(client){ %>
+    <h3 class="client-name"><%= client.name %></h3>
+    <h5 class="client-contact"><%= client.contact %> <a href="mailto:<%= client.email %>"><i class="fa fa-envelope"></i></a></h5>
+  <% }); %>
