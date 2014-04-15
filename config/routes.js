@@ -3,6 +3,7 @@
  */
 
 var clients = require('../app/controllers/clients'), 
+  projects = require('../app/controllers/projects'), 
   home = require('../app/controllers/home');
 
 module.exports = function(app, passport) {
@@ -20,4 +21,17 @@ module.exports = function(app, passport) {
   app.get('/clients/:slug/edit', clients.edit);
   app.post('/clients/:slug/edit', clients.update);
   app.get('/clients/:id/delete', clients.delete);
+
+
+
+  // projects
+  app.get('/projects', projects.index);
+  app.get('/projects/json', projects.index);
+  app.get('/projects/new', projects.new);
+  app.post('/projects/new', projects.create);
+  app.get('/projects/:slug', projects.show);
+  app.get('/projects/:slug/json', projects.show);
+  app.get('/projects/:slug/edit', projects.edit);
+  app.post('/projects/:slug/edit', projects.update);
+  app.get('/projects/:id/delete', projects.delete);  
 };

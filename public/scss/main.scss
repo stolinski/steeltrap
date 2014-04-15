@@ -45,6 +45,14 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+.hide {
+  display: none !important;
+}
+
+.full {
+  width: 100% !important;
+}
+
 .header {
   @include clearfix;
   background: $dark; 
@@ -90,30 +98,57 @@ main {
   padding:40px 10%;
 }
 
+.new-client-btn {
+  float: right;
+  @include clearfix;
+}
+
+.client-grouping {
+  @include clearfix;
+  margin-top: 60px;
+}
+
+
+.client-status-container {
+  width: 49%;
+  float: left;
+  &:nth-child(odd) {
+    margin-right: 2%;
+  }
+}
 
 .client-container {
+  min-height: 120px;
   position: relative;
-  width: 50%;
-  padding: 10px;
+  width: 100%;
+  padding:15px 1.5%;
   background: white;
   margin-bottom: 10px;
+  @include trans;
   @include clearfix;
   @include border-radius(5px);
-  &.not-active {
+  &.inactive {
     opacity: 0.5;
+  }
+  &.neverwas {
+    opacity: 0.2;
   }
   .client-details {
     float: left;
   }
 
+  .client-status {
+    text-transform: capitalize;  
+  }
+
   .client-email {
     float: right;
     text-align: right;
-    @include trans;
     .client-email-icon {
       @include fs(32px);
       color: $dark-red;
       display: block;
+      @include trans;
       &:hover {
         color:$red;
       }
@@ -123,12 +158,13 @@ main {
     }
   }
   .client-edit-btn {
+    margin-left: 10px;
+    display: inline-block;
+    cursor: pointer;
     opacity: 0;
     @include fs(18px);
-    position: absolute;
-    bottom: 8px;
-    right: 15px;
     color: $gray;
+    @include trans;
   }
   &:hover {
     .client-edit-btn {
@@ -136,7 +172,7 @@ main {
     }
   }
   .client-edit-form {
-    input {
+    input[type='text'] {
       width: 100%;
       display: block;
       margin-bottom: 5px;
@@ -145,5 +181,8 @@ main {
     input[type='checkbox'] {
       display: inline-block;
     }
+  }
+  .client-edit-form-save {
+    float: right;
   }
 }

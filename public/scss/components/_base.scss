@@ -17,12 +17,14 @@ html, body {
 ::-moz-selection {
     text-shadow: none;
     color: #FFF;
+    background: $dark;
     @include trans;
 }
 
 ::selection {
     text-shadow: none;
     color: #FFF;
+    background: $dark;
     @include trans;
 }
 
@@ -48,11 +50,11 @@ ol {
   }
 }
 
-.btn {
+.btn, input[type='submit'] {
   background:$dark-blue;
   color: white;
   text-decoration: none;
-  padding:5px;
+  padding:5px 10px;
   margin-bottom: 20px;
   display: inline-block;
   @include border-radius(5px);

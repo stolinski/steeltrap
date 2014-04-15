@@ -2,6 +2,11 @@
   <input value="<%= _client.name? _client.name : '' %>" type="text" name="name" placeholder="Client Name" />
   <input value="<%= _client.contact? _client.contact : '' %>" type="text" name="contact" placeholder="Contact Name" />
   <input value="<%= _client.email? _client.email : '' %>" type="text" name="email" placeholder="Contact Email" />
-  <input type="checkbox" name="active" <%= _client.active? "checked" : "" %>/>
+  <select name="status">
+    <option value="potential">Potential</option>
+    <option value="active">Active</option>
+    <option value="inactive">Inactive</option>
+    <option value="neverwas">Neverwas</option>
+  </select>
   <input type="submit" />
 </form>

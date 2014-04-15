@@ -16,7 +16,7 @@ var ClientSchema = new Schema({
   slug: String,
   contact: String,
   email: String,
-  active: {type: Boolean, default: true },
+  status: String,
 });
 
 

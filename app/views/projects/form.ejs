@@ -1,0 +1,20 @@
+<form method="post">
+  <input value="<%= _project.title? _client.title : '' %>" type="text" name="title" placeholder="Title" />
+  <textarea value="<%= _project.desc? _client.desc : '' %>" type="textarea" name="desc" placeholder="Project Description" /></textarea>
+  <input value="<%= _project.cost? _client.cost : '' %>" type="number" name="cost" placeholder="00" />
+  <input value="<%= _project.paid? _client.paid : '' %>" type="number" name="paid" placeholder="00" />
+  <lable>Invoiced: <input type="checkbox" name="invoiced" <%= _project.invoiced? "checked" : "" %>/></lable>
+  <select name="status">
+    <option value="potential">Potential</option>
+    <option value="active">Active</option>
+    <option value="inactive">Inactive</option>
+    <option value="neverwas">Neverwas</option>
+  </select>
+    <select name="_client">
+    <% clients.forEach(function(client){ %>
+      <option value="<%= client._id %>"><%= client.name %></option>
+    <% }); %>
+    </select>
+  <input type="submit" />
+</form>
+

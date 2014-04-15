@@ -18,13 +18,21 @@ var Client = mongoose.model('Client');
  */
 
 exports.index = function (req, res) {
-  Client.find({ active: true },function(err, clients) {
-    if (req.url.indexOf('/json') > -1) return res.send(clients); // json
+  Client.find({ status: 'active' },function(err, clients) {
     
-    Client.find({ active: false }, function (err, iaclients) {
-      if (err) return handleError(err);
-      res.locals.iaclients = iaclients;
-      return res.render('clients', {clients:clients});
+    if (req.url.indexOf('/json') > -1) return res.send(clients); // json
+    Client.find({ status: 'inactive' }, function (err, iaclients) {
+      Client.find({ status: 'potential' }, function (err, potential) {
+        Client.find({ status: 'neverwas' }, function (err, neverwas) {
+
+          res.locals.clients = clients;
+          res.locals.iaclients = iaclients;
+          res.locals.potential = potential;
+          res.locals.neverwas = neverwas
+          return res.render('clients');
+
+        });
+      });
     });
     
   });
@@ -78,7 +86,6 @@ exports.edit = function (req, res, next) {
 
 exports.create = function (req, res, next) {
   var client = new Client(req.body);
-  client.active = req.body.active == undefined ? false : true;
   client.save( function( err) {
     if( !err ) {
       return res.redirect('/clients');
@@ -100,7 +107,7 @@ exports.update = function (req, res, next) {
     client.name = req.body.name;
     client.contact = req.body.contact;
     client.email = req.body.email;
-    client.active = req.body.active === undefined ? false : true;
+    client.status = req.body.status;
     client.save( function( err ) {
       if( !err ) {
         return res.redirect('/clients');
