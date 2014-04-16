@@ -11,7 +11,7 @@
     Paid: $<%= project.paid %><br />
     Owed: <span class="<%= owedValue(project.owed) %>">$<%= project.owed %></span><br />
     Invoiced: <%= project.invoiced? "Yes" : "No" %><br />
-    Invoice Date: <%= project.invdate %><br />
-    Paid Date: <%= project.paiddate %>
+    Invoice Date: <%= moment(project.invdate).format('MM/DD/YYYY') %><br />
+    Paid Date: <%= moment(project.paiddate).format('MM/DD/YYYY') %>
   </div>
 </article>

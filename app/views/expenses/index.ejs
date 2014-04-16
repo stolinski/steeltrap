@@ -1,0 +1,37 @@
+<% layout('../layout') -%>
+<span class="btn new-project-btn">Add New Expense</span>
+<h2>Expenses</h2>
+
+<div class="expense-form">
+<form method="post" action="/expenses/new">
+  <input value="<%= _expense.title? _expense.title : '' %>" type="text" name="title" placeholder="Expense Title" />
+  <label>Project Cost:
+    $<input value="<%= _expense.cost? _expense.cost : '' %>" type="number" name="cost" placeholder="00" />
+  </label>  
+  <label>Purchased Date: 
+    <input class="date" type="text" name="date" value="<%= _expense.date? _expense.date: '' %>" />
+  </label>  
+
+  <label>Client: 
+    <select name="_client">
+    <option value="none">None</option>
+    <% clients.forEach(function(client){ %>
+      <option value="<%= client._id %>"><%= client.name %></option>
+    <% }); %>
+    </select>
+  </label>
+
+  <label>Project: 
+    <select name="_project">
+      <option value="none">None</option>
+    <% projects.forEach(function(project){ %>
+      <option value="<%= project._id %>"><%= project.title %></option>
+    <% }); %>
+    </select>
+  </label>
+  
+  <input type="submit" />
+</form>
+</div>
+
+<%-partial('expense',expenses)%>

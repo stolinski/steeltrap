@@ -19,6 +19,7 @@ app.set('views', __dirname + '/app/views');
 app.set('view engine', 'ejs');
 
 app.use(middleware.helpers);
+app.locals.moment = require('moment');
 
 
 // Routes

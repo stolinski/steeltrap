@@ -82,6 +82,7 @@ exports.edit = function (req, res, next) {
 
 exports.create = function (req, res, next) {
   var project = new Project(req.body);
+  console.log(project);
   project.save( function( err) {
     if( !err ) {
       return res.redirect('/projects');

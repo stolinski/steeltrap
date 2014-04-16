@@ -4,6 +4,7 @@
 
 var clients = require('../app/controllers/clients'), 
   projects = require('../app/controllers/projects'), 
+  expenses = require('../app/controllers/expenses'), 
   home = require('../app/controllers/home');
 
 module.exports = function(app, passport) {
@@ -34,4 +35,13 @@ module.exports = function(app, passport) {
   app.get('/projects/:slug/edit', projects.edit);
   app.post('/projects/:slug/edit', projects.update);
   app.get('/projects/:id/delete', projects.delete);  
+
+
+  // expenses
+  app.get('/expenses', expenses.index);
+  app.get('/expenses/json', expenses.index);
+  app.post('/expenses/new', expenses.create);
+  app.post('/expenses/:id/edit', expenses.update);
+  app.get('/expenses/:id/delete', expenses.delete);  
+
 };

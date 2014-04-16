@@ -8,7 +8,8 @@
     "underscore": "*",
     "ejs": "~0.7.1",
     "ejs-locals": "latest",
-    "body-parser" : "latest"
+    "body-parser" : "latest",
+    "moment": "latest"
     },
   "devDependencies": {
     "gulp-jshint": "~1.4.0",

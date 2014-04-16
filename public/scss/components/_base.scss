@@ -68,6 +68,7 @@ ol {
 }
 
 .btn, input[type='submit'] {
+  cursor: pointer;
   background:$dark-blue;
   color: white;
   text-decoration: none;
