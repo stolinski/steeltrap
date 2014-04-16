@@ -53,15 +53,29 @@ body {
   width: 100% !important;
 }
 
+.red {
+  color: $red !important;
+}
+
+.edit-btn {
+  margin-left: 10px;
+  display: inline-block;
+  cursor: pointer;
+  opacity: 0;
+  @include fs(18px);
+  color: $gray;
+  @include trans;
+}
+
 .header {
   @include clearfix;
   background: $dark; 
   color:#eee;
-  padding:20px 10%;
+  padding:0 10%;
   span {
     display: block;
     float: left;
-    margin-top: 20px;
+    margin-top: 40px;
   }
 }
 
@@ -69,6 +83,7 @@ body {
   float: left;
   margin:0 20px 0 0;
   font-weight: 300;
+  line-height: 84px;
 }
 
 .site-nav {
@@ -78,12 +93,26 @@ body {
       float: left;
       @include fs(18px);
       a {
+        text-align: center;
         display: block;
         text-decoration: none;
         color:#eee;
-      }
-      & + li {
-        margin-left: 20px;
+        @include trans;
+        padding: 20px 20px 16px;
+        border-bottom: 4px dotted $dark;
+        &:hover {
+          border-bottom: 4px solid $yellow;
+          i {
+            top:-4px;
+          }
+        }
+        i {
+          display: block;
+          margin-bottom: 4px;
+          position: relative;
+          top:0;
+          @include trans;
+        }
       }
     }
   }
@@ -98,7 +127,7 @@ main {
   padding:40px 10%;
 }
 
-.new-client-btn {
+.new-client-btn, .new-project-btn  {
   float: right;
   @include clearfix;
 }
@@ -157,17 +186,8 @@ main {
       text-decoration: none;
     }
   }
-  .client-edit-btn {
-    margin-left: 10px;
-    display: inline-block;
-    cursor: pointer;
-    opacity: 0;
-    @include fs(18px);
-    color: $gray;
-    @include trans;
-  }
   &:hover {
-    .client-edit-btn {
+    .edit-btn {
       opacity: 1;
     }
   }
@@ -184,5 +204,26 @@ main {
   }
   .client-edit-form-save {
     float: right;
+  }
+}
+
+
+.project-container {
+  padding:15px 1.5%;
+  background: white;
+  margin-bottom: 10px; 
+  width: 100%;
+  @include clearfix;
+  @include border-radius(5px);
+  .project-details {
+    float: left;
+  }
+  .project-money {
+    float: right;
+  }
+  &:hover {
+    .edit-btn {
+      opacity: 1;
+    }
   }
 }

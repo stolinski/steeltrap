@@ -1,8 +1,7 @@
 <article class="client-container <%= client.status %>">
   <div class="client-details">
-    <h3 class="client-name"><%= client.name %> <span class="client-edit-btn" href="/clients/<%= client.slug %>/edit"><i class="fa fa-pencil"></i></span></h3>
+    <h3 class="client-name"><%= client.name %> <span class="edit-btn client-edit-btn" href="/clients/<%= client.slug %>/edit"><i class="fa fa-pencil"></i></span></h3>
     <h5 class="client-contact"><%= client.contact %></h5>
-    <div class="client-meta">Status: <span class="client-status"><%= client.status %></span></div>
     <form class="client-edit-form hide" action="clients/<%= client.slug %>/edit" method="post">
       <input value="<%= client.name? client.name : '' %>" type="text" name="name" placeholder="Client Name" />
       <input value="<%= client.contact? client.contact : '' %>" type="text" name="contact" placeholder="Contact Name" />

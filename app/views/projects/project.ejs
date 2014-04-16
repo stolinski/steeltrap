@@ -1,4 +1,17 @@
 <article class="project-container <%= project.status %>">
-  <%= project.title %>
-  <%= project._client.name %>
+  <div class="project-details">
+    <h3><%= project.title %> <a class="edit-btn" href="/projects/<%= project.slug %>/edit"><i class="fa fa-pencil"></i></a></h3>
+    <h4><%= project._client.name %></h4>
+    <p>
+      <%= project.desc %>
+    </p>
+  </div>
+  <div class="project-money">
+    Cost: $<%= project.cost %><br />
+    Paid: $<%= project.paid %><br />
+    Owed: <span class="<%= owedValue(project.owed) %>">$<%= project.owed %></span><br />
+    Invoiced: <%= project.invoiced? "Yes" : "No" %><br />
+    Invoice Date: <%= project.invdate %><br />
+    Paid Date: <%= project.paiddate %>
+  </div>
 </article>

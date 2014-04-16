@@ -28,7 +28,7 @@ exports.index = function (req, res) {
           res.locals.clients = clients;
           res.locals.iaclients = iaclients;
           res.locals.potential = potential;
-          res.locals.neverwas = neverwas
+          res.locals.neverwas = neverwas;
           return res.render('clients');
 
         });

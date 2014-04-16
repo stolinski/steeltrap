@@ -19,6 +19,9 @@ var ProjectSchema = new Schema({
   status: String,
   desc: String,
   _client: { type: ObjectId, ref: 'Client' },
+  owed: Number,
+  paiddate: Date,
+  invdate: Date,
 });
 
 
@@ -36,6 +39,7 @@ ProjectSchema.pre('validate', function(next) {
 
 ProjectSchema.pre('save', function(next) {
   this.slug = toSlug(this.title);
+  this.owed = this.cost - this.paid;
   next();
 });
 

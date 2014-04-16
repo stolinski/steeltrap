@@ -1,20 +1,42 @@
 <form method="post">
-  <input value="<%= _project.title? _client.title : '' %>" type="text" name="title" placeholder="Title" />
-  <textarea value="<%= _project.desc? _client.desc : '' %>" type="textarea" name="desc" placeholder="Project Description" /></textarea>
-  <input value="<%= _project.cost? _client.cost : '' %>" type="number" name="cost" placeholder="00" />
-  <input value="<%= _project.paid? _client.paid : '' %>" type="number" name="paid" placeholder="00" />
-  <lable>Invoiced: <input type="checkbox" name="invoiced" <%= _project.invoiced? "checked" : "" %>/></lable>
-  <select name="status">
-    <option value="potential">Potential</option>
-    <option value="active">Active</option>
-    <option value="inactive">Inactive</option>
-    <option value="neverwas">Neverwas</option>
-  </select>
+  <input value="<%= _project.title? _project.title : '' %>" type="text" name="title" placeholder="Title" />
+  <textarea type="textarea" name="desc" placeholder="Project Description" /><%= _project.desc? _project.desc : '' %></textarea>
+  
+  <label>Project Cost:
+    $<input value="<%= _project.cost? _project.cost : '' %>" type="number" name="cost" placeholder="00" />
+  </label>
+
+  <label>Amount Paid:
+    $<input value="<%= _project.paid? _project.paid : '0' %>" type="number" name="paid" placeholder="00" />
+  </label>
+
+  <label>Invoiced: 
+    <input type="checkbox" name="invoiced" <%= _project.invoiced? "checked" : "" %>/>
+  </label>
+
+  <label>Invoice Date: 
+    <input class="date" type="text" name="invdate" value="<%= _project.invdate? _project.invdate : '' %>" />
+  </label>
+
+  <label>Paid Date: 
+    <input class="date" type="text" name="paiddate" value="<%= _project.paiddate? _project.paiddate: '' %>" />
+  </label>  
+
+  <label>Status: 
+    <select name="status">
+      <option <%= _project.status == "potential" ? "selected" : "" %> value="potential">Potential</option>
+      <option <%= _project.status == "active" ? "selected" : "" %> value="active">Active</option>
+      <option <%= _project.status == "completed" ? "selected" : "" %> value="completed">Completed</option>
+      <option <%= _project.status == "neverwas" ? "selected" : "" %> value="neverwas">Neverwas</option>
+    </select>
+  </label>
+  <label>Client: 
     <select name="_client">
     <% clients.forEach(function(client){ %>
       <option value="<%= client._id %>"><%= client.name %></option>
     <% }); %>
     </select>
+  </label>
   <input type="submit" />
 </form>
 

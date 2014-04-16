@@ -19,7 +19,9 @@ exports.helpers = function (req, res, next) {
   toSlug = function (value) {
     return value.toLowerCase().replace(/[ |_]/g, '-').replace(/[^\w-]+/g,'');
   };
-
+  owedValue = function (value) {
+    return  value > 0 ? 'red' : '';
+  };
 
   next();
 };

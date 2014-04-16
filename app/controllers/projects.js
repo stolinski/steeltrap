@@ -20,7 +20,7 @@ var Client = mongoose.model('Client');
 
 exports.index = function (req, res) {
   Project
-  .find()
+  .find({ status: 'active' })
   .populate('_client')
   .exec(function (err, projects) {
     return res.render('projects', {projects:projects});
@@ -67,7 +67,10 @@ exports.edit = function (req, res, next) {
   Project.findOne({ 'slug': req.params.slug }, function (err, project) {
     if (!project) return next();
     res.locals._project = project;
-    return res.render('projects/edit'); // html
+      Client.find({ status: 'active' },function(err, clients) {
+        res.locals.clients = clients;
+        return res.render('projects/edit'); // html
+      });
   });
 };
 
@@ -97,10 +100,15 @@ exports.create = function (req, res, next) {
 
 exports.update = function (req, res, next) {
   Project.findOne({ 'slug': req.params.slug }, function (err, project) {
-    project.name = req.body.name;
-    project.contact = req.body.contact;
-    project.email = req.body.email;
+    project.title = req.body.title;
+    project.cost = req.body.cost;
+    project.paid = req.body.paid;
     project.status = req.body.status;
+    project.paiddate = req.body.paiddate;
+    project.invdate = req.body.invdate;
+    project.invoiced= req.body.invoiced? "true" : "false";
+    project.desc = req.body.desc;
+    project._client = req.body._client;
     project.save( function( err ) {
       if( !err ) {
         return res.redirect('/projects');
