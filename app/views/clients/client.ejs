@@ -8,7 +8,9 @@
   <div class="client-details">
     <h3 class="client-name"><%= client.name %> <span class="edit-btn client-edit-btn" href="/clients/<%= client.slug %>/edit"><i class="fa fa-pencil"></i></span></h3>
     <h5 class="client-contact"><%= client.contact %></h5>
+    <p class="client-email" href="mailto:<%= client.email %>"><%= client.email %></p>
     <form class="client-edit-form hide" action="clients/<%= client.slug %>/edit" method="post">
+      <a href="<%= client._id %>"><%= client._id %></a>
       <input value="<%= client.name? client.name : '' %>" type="text" name="name" placeholder="Client Name" />
       <input value="<%= client.contact? client.contact : '' %>" type="text" name="contact" placeholder="Contact Name" />
       <input value="<%= client.email? client.email : '' %>" type="text" name="email" placeholder="Contact Email" />
@@ -21,8 +23,9 @@
       <input class="client-edit-form-save" type="submit" value="Save"/>
     </form>
   </div>
-  <div class="client-email">
-    <span class="client-email-link" href="mailto:<%= client.email %>"><%= client.email %></span>
-    <a class="client-email-icon" href="mailto:<%= client.email %>"><i class="fa fa-envelope"></i></a>
-  </div>
+  <ul class="client-options">
+    <li><a class="client-email-icon" href="mailto:<%= client.email %>"><i class="fa fa-envelope"></i></a></li>
+    <li><i class="fa fa-briefcase"></i></li>
+    <li><i class="fa fa-calendar"></i></li>
+  </ul>
 </article>

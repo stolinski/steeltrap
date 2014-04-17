@@ -152,15 +152,19 @@ main {
   position: relative;
   width: 49%;
   float: left;
-  padding:120px 1.5%  15px;
+  padding:160px 3%  15px;
   background: white;
   margin-bottom: 10px;
-  height: 400px;
+  min-height: 400px;
   @include trans;
   @include clearfix;
   @include border-radius(5px);
+  @include box-shadow(1px 1px 4px rgba(black, 0.0));
   &:nth-child(odd) {
     margin-left: 1%;
+  }
+  &:hover {
+    @include box-shadow(1px 1px 4px rgba(black, 0.2));
   }
   &.inactive {
     opacity: 0.5;
@@ -182,36 +186,50 @@ main {
     z-index: 100;
     display: block;
     margin: 0 auto;
+    top: -40px;
     @include box-shadow(1px 1px 4px rgba(black, 0.2));
   }
+  
+  .client-name {
+    margin-bottom: 10px;  
+  }
 
-  .client-details {
+  h5 {
+    @include fs(20px);
+    margin-bottom: 10px;
   }
 
   .client-status {
     text-transform: capitalize;  
   }
-
+  
   .client-email {
-    text-align: right;
-    .client-email-icon {
-      @include fs(32px);
-      color: $dark-red;
-      display: block;
-      @include trans;
-      &:hover {
-        color:$red;
-      }
-    }
-    .client-email-link {
-      text-decoration: none;
+    margin-bottom: 20px;  
+  }
+
+  .client-options {
+    @include clearfix;
+    li {
+      float: left;
     }
   }
+
+  .client-email-icon {
+    @include fs(32px);
+    color: #ccc;
+    display: block;
+    @include trans;
+    &:hover {
+      color:$red;
+    }
+  }
+
   &:hover {
     .edit-btn {
       opacity: 1;
     }
   }
+
   .client-edit-form {
     input[type='text'] {
       width: 100%;
