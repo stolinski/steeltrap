@@ -4,8 +4,11 @@
  */
 
 var mongoose = require('mongoose'), 
-  Schema = mongoose.Schema;
-
+  Schema = mongoose.Schema,
+  crate = require("mongoose-crate"),
+  ImageMagick = require("mongoose-crate-imagemagick"),
+  S3 = require("mongoose-crate-s3"),
+  gravatar = require('gravatar');
 
 /**
  * Client Schema
@@ -17,7 +20,40 @@ var ClientSchema = new Schema({
   contact: String,
   email: String,
   status: String,
+  grav: String,
 });
+
+ClientSchema.plugin(crate, {
+  storage: new S3({
+    key: "AKIAJVGNOG6LOKPJXHTQ",
+    secret: "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",
+    bucket: "steeltrapp"
+  }),
+  fields: {
+    image: {
+      processor: new ImageMagick({
+        tmpDir: "/tmp", // Where transformed files are placed before storage, defaults to os.tmpdir()
+        formats: ["JPEG", "GIF", "PNG"], // Supported formats, defaults to ["JPEG", "GIF", "PNG", "TIFF"]
+        transforms: {
+          original: {
+            // keep the original file
+          },
+          small: {
+            resize: "150x150",
+            format: ".jpg"
+          },
+          medium: {
+            resize: "300",
+            crop: "300x187+30+15",
+            format: ".jpg"
+          }
+        }
+      })      
+    }
+  }
+});
+
+
 
 
 /**
@@ -34,6 +70,7 @@ ClientSchema.pre('validate', function(next) {
 
 ClientSchema.pre('save', function(next) {
   this.slug = toSlug(this.name);
+  this.grav = gravatar.url(this.email, {s: '200', r: 'pg', d: 'mm'});
   next();
 });
 

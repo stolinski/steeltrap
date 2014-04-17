@@ -4,8 +4,10 @@
  */
 
 var mongoose = require('mongoose'), 
-  _ = require('underscore');
-
+  _ = require('underscore'),
+  crate = require("mongoose-crate"),
+  ImageMagick = require("mongoose-crate-imagemagick"),
+  S3 = require("mongoose-crate-s3");
 /**
  * Models
  */
@@ -19,18 +21,15 @@ var Client = mongoose.model('Client');
 
 exports.index = function (req, res) {
   Client.find({ status: 'active' },function(err, clients) {
-    
     if (req.url.indexOf('/json') > -1) return res.send(clients); // json
     Client.find({ status: 'inactive' }, function (err, iaclients) {
       Client.find({ status: 'potential' }, function (err, potential) {
         Client.find({ status: 'neverwas' }, function (err, neverwas) {
-
           res.locals.clients = clients;
           res.locals.iaclients = iaclients;
           res.locals.potential = potential;
           res.locals.neverwas = neverwas;
           return res.render('clients');
-
         });
       });
     });
@@ -86,12 +85,17 @@ exports.edit = function (req, res, next) {
 
 exports.create = function (req, res, next) {
   var client = new Client(req.body);
-  client.save( function( err) {
-    if( !err ) {
-      return res.redirect('/clients');
-    } else {
-      console.log( err );
-    }
+  console.log(req.files);
+  console.log(req.body);
+  client.attach('image', req.files.image, function(err) {
+    if(err) return next(err);
+    client.save( function( err) {
+      if( !err ) {
+        return res.redirect('/clients');
+      } else {
+        console.log( err );
+      }
+    });
   });
 };
 

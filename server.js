@@ -4,13 +4,19 @@ var express = require('express'),
   engine = require('ejs-locals'),
   mongoose = require( 'mongoose' ), //MongoDB integration
   middleware = require('./app/middleware'),
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  multer = require('multer');
 
 var app = express();
 
-
 app.use(express.static("public"));
+
 app.use(bodyParser());
+app.use(multer({ dest: __dirname + '/public/uploads'}));
+
+
+
+
 
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);

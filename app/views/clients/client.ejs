@@ -1,4 +1,10 @@
 <article class="client-container <%= client.status %>">
+  <% if(client.image.medium.url){ %>
+    <img class="client-image" src="<%= client.image.medium.url %>" />
+  <% } %>
+  <% if(client.grav){ %>
+    <img class="client-grav" src="<%= client.grav %>" />
+  <% } %>
   <div class="client-details">
     <h3 class="client-name"><%= client.name %> <span class="edit-btn client-edit-btn" href="/clients/<%= client.slug %>/edit"><i class="fa fa-pencil"></i></span></h3>
     <h5 class="client-contact"><%= client.contact %></h5>

@@ -147,23 +147,45 @@ main {
 }
 
 .client-container {
+  overflow: hidden;
   min-height: 120px;
   position: relative;
-  width: 100%;
-  padding:15px 1.5%;
+  width: 49%;
+  float: left;
+  padding:120px 1.5%  15px;
   background: white;
   margin-bottom: 10px;
+  height: 400px;
   @include trans;
   @include clearfix;
   @include border-radius(5px);
+  &:nth-child(odd) {
+    margin-left: 1%;
+  }
   &.inactive {
     opacity: 0.5;
   }
   &.neverwas {
     opacity: 0.2;
   }
+  .client-image {
+    position: absolute;
+    width: 100%;
+    top:0;
+    left:0;
+  }
+  .client-grav {
+    border:solid 4px white;
+    border-radius: 100px;
+    width: 100px;
+    position: relative;
+    z-index: 100;
+    display: block;
+    margin: 0 auto;
+    @include box-shadow(1px 1px 4px rgba(black, 0.2));
+  }
+
   .client-details {
-    float: left;
   }
 
   .client-status {
@@ -171,7 +193,6 @@ main {
   }
 
   .client-email {
-    float: right;
     text-align: right;
     .client-email-icon {
       @include fs(32px);

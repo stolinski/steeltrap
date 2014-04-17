@@ -1,12 +1,28 @@
-<form method="post">
-  <input value="<%= _client.name? _client.name : '' %>" type="text" name="name" placeholder="Client Name" />
-  <input value="<%= _client.contact? _client.contact : '' %>" type="text" name="contact" placeholder="Contact Name" />
-  <input value="<%= _client.email? _client.email : '' %>" type="text" name="email" placeholder="Contact Email" />
-  <select name="status">
-    <option value="potential">Potential</option>
-    <option value="active">Active</option>
-    <option value="inactive">Inactive</option>
-    <option value="neverwas">Neverwas</option>
-  </select>
+<form method="post" enctype="multipart/form-data">
+  <label>
+    Client Name: <input value="<%= _client.name? _client.name : '' %>" type="text" name="name" placeholder="Company Name" />
+  </label>
+
+  <label>
+    Contact Name: <input value="<%= _client.contact? _client.contact : '' %>" type="text" name="contact" placeholder="First Last" />
+  </label>
+
+  <label>
+    Contact Email: <input value="<%= _client.email? _client.email : '' %>" type="text" name="email" placeholder="yo@thug.com" />
+  </label>
+
+  <label>
+    Image: <input type="file" name="image" />
+  </label>
+
+  <label>
+    Client Status:
+    <select name="status">
+      <option value="potential">Potential</option>
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+      <option value="neverwas">Neverwas</option>
+    </select>
+   </label> 
   <input type="submit" />
 </form>
