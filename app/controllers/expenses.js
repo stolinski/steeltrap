@@ -22,7 +22,7 @@ var Expense = mongoose.model('Expense'),
 exports.index = function (req, res) {
   var expense = new Expense();
   res.locals._expense = expense;
-  Expense.find( function (err, expenses) {
+  Expense.find().sort({date: 'desc'}).populate('_project').exec(function (err, expenses) {
     Project.find( function (err, projects) {
       Client.find( function (err, clients) {
         res.locals.clients = clients;
