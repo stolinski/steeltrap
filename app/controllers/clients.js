@@ -127,8 +127,8 @@ exports.delete = function (req, res, next) {
     return Client.findById( req.params.id, function( err, client ) {
         return client.remove( function( err ) {
             if( !err ) {
-                console.log( 'Client Removed' );
-                return response.send( '' );
+                console.log( 'Client Removed!' );
+                return res.redirect('/clients');
             } else {
                 console.log( err );
             }

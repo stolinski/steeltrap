@@ -10,7 +10,7 @@
     <h5 class="client-contact"><%= client.contact %></h5>
     <p class="client-email" href="mailto:<%= client.email %>"><%= client.email %></p>
     <form class="client-edit-form hide" action="clients/<%= client.slug %>/edit" method="post">
-      <a href="<%= client._id %>"><%= client._id %></a>
+      <a href="/clients/<%= client._id %>/delete">DELETE</a>
       <input value="<%= client.name? client.name : '' %>" type="text" name="name" placeholder="Client Name" />
       <input value="<%= client.contact? client.contact : '' %>" type="text" name="contact" placeholder="Contact Name" />
       <input value="<%= client.email? client.email : '' %>" type="text" name="email" placeholder="Contact Email" />
@@ -24,8 +24,8 @@
     </form>
   </div>
   <ul class="client-options">
-    <li><a class="client-email-icon" href="mailto:<%= client.email %>"><i class="fa fa-envelope"></i></a></li>
-    <li><i class="fa fa-briefcase"></i></li>
-    <li><i class="fa fa-calendar"></i></li>
+    <li><a class="client-email-icon" href="mailto:<%= client.email %>"><i class="fa fa-envelope"></i><span>Email Client</span></a></li>
+    <li><a class="client-briefcase-icon" href="#"><i class="fa fa-briefcase"></i><span>Add Project</span></a></li>
+    <li><a class="client-calendar-icon" href="#"><i class="fa fa-calendar"></i><span>Add Event</span></a></li>
   </ul>
 </article>

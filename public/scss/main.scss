@@ -177,19 +177,27 @@ main {
     width: 100%;
     top:0;
     left:0;
+    z-index: 10;
   }
   .client-grav {
     border:solid 4px white;
     border-radius: 100px;
     width: 100px;
     position: relative;
-    z-index: 100;
+    z-index: 105;
     display: block;
     margin: 0 auto;
     top: -40px;
+    background: #666;
     @include box-shadow(1px 1px 4px rgba(black, 0.2));
+    @include trans;
   }
   
+  .client-details {
+    position: relative;
+    z-index: 100;  
+  }
+
   .client-name {
     margin-bottom: 10px;  
   }
@@ -211,20 +219,76 @@ main {
     @include clearfix;
     li {
       float: left;
+      width: 33.3333%;
+      padding:10px 10%;
+      text-align: center;
+      a {
+        @include fs(32px);
+        color: #ccc;
+        @include trans;
+        display: block;
+        position: relative;
+      }
+      & + li {
+        border-left: 1px solid #eee;
+      }
+      &:hover {
+        > a > span {
+          bottom: -22px;
+          opacity: 1;
+        }
+      }
+    }
+    span {
+      opacity: 0;
+      position: absolute;
+      bottom:-40px;
+      @include fs(13px);
+      text-transform: uppercase;
+      display: block;
+      right: -38.5px;
+      width: 115px;
+      background: #EEE;
+      color: #999;
+      border-radius: 4px;
+      padding: 3px 7px;
+      @include trans;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -25px;
+        right: 42.5px;
+        border-bottom:solid 15px #eee;
+        border-right:solid 15px transparent;
+        border-left:solid 15px transparent;
+        border-top:solid 15px transparent;
+      }
     }
   }
 
   .client-email-icon {
-    @include fs(32px);
-    color: #ccc;
-    display: block;
-    @include trans;
     &:hover {
       color:$red;
     }
   }
 
+  .client-briefcase-icon {
+    &:hover {
+      color:#333;
+    }
+  }
+
+  .client-calendar-icon {
+    &:hover {
+      color:$dark-blue;
+    }
+  }  
+
   &:hover {
+    .client-grav {
+      top:-48px;
+    }
     .edit-btn {
       opacity: 1;
     }
