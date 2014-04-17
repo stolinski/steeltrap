@@ -3,10 +3,11 @@
 \*------------------------------------*/
 
 /**
- * Imports................Brings in Compass, Toolkit, Breakpoint, Reset, Susy2, Mixins, Variables and Components
+ * Imports................Brings in FontAwesome, Compass, Toolkit, Breakpoint, Reset, Susy2, Mixins, Variables and Components
  * Components.............Site Components 
  * * Base.................Base Element Styles
  * * Typography...........Base Type Styles
+ * * Utility Classes......Reusable Utilities
  * Sections...............Page Sections
  */
 
@@ -39,23 +40,7 @@
 @import "reset";
 @import 'components/**/*';
 
-body {
-  background: #eee;
-  color:#333;
-  font-family: 'Lato', sans-serif;
-}
 
-.hide {
-  display: none !important;
-}
-
-.full {
-  width: 100% !important;
-}
-
-.red {
-  color: $red !important;
-}
 
 .edit-btn {
   margin-left: 10px;
@@ -139,10 +124,13 @@ main {
 
 
 .client-status-container {
-  width: 49%;
-  float: left;
-  &:nth-child(odd) {
-    margin-right: 2%;
+  @include clearfix;
+  @include breakpoint($norm) {
+    width: 49%;
+    float: left;
+    &:nth-child(odd) {
+      margin-right: 2%;
+    }    
   }
 }
 
@@ -150,8 +138,7 @@ main {
   overflow: hidden;
   min-height: 120px;
   position: relative;
-  width: 49%;
-  float: left;
+  width: 100%;
   padding:160px 3%  15px;
   background: white;
   margin-bottom: 10px;
@@ -160,6 +147,10 @@ main {
   @include clearfix;
   @include border-radius(5px);
   @include box-shadow(1px 1px 4px rgba(black, 0.0));
+  @include breakpoint($med) {
+    width: 49%; 
+    float: left;
+  }
   &:nth-child(odd) {
     margin-left: 1%;
   }
