@@ -14,8 +14,17 @@
     "mongoose-crate" : "latest",
     "mongoose-crate-imagemagick" : "latest",
     "multer": "latest",
-    "gravatar" : "latest"
-    },
+    "gravatar" : "latest",
+    "passport" : "~0.1.17",     
+    "passport-local" : "~0.1.6",  
+    "passport-facebook" : "~1.0.2", 
+    "passport-twitter" : "~1.0.2",  
+    "passport-google-oauth" : "~0.1.5",
+    "bcrypt-nodejs" : "latest",
+    "express-session" : "latest",
+    "connect-flash": "latest",
+    "cookie-parser": "latest"
+  },
   "devDependencies": {
     "gulp-jshint": "~1.4.0",
     "gulp-changed": "~0.1.0",

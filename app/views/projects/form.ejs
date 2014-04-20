@@ -32,6 +32,7 @@
   </label>
   <label>Client: 
     <select name="_client">
+      <option value="none">None</option>
     <% clients.forEach(function(client){ %>
       <option value="<%= client._id %>"><%= client.name %></option>
     <% }); %>

@@ -19,5 +19,5 @@ var Client = mongoose.model('Client');
  */
 
 exports.index = function (req, res, next) {
-  return res.render('home');
+  return res.render('home',{ message: req.flash('loginMessage') });
 };

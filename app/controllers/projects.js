@@ -23,7 +23,13 @@ exports.index = function (req, res) {
   .find({ status: 'active' })
   .populate('_client')
   .exec(function (err, projects) {
-    return res.render('projects', {projects:projects});
+    Project
+      .find({ status: 'inactive' })
+      .populate('_client')
+      .exec(function (err, iaprojects) {
+        res.locals.iaprojects = iaprojects;
+        return res.render('projects', {projects:projects});
+    });  
   });
 };
 
@@ -81,8 +87,17 @@ exports.edit = function (req, res, next) {
  */
 
 exports.create = function (req, res, next) {
-  var project = new Project(req.body);
-  console.log(project);
+  var project = new Project();
+  project.title = req.body.title;
+  project.cost = req.body.cost;
+  project.paid = req.body.paid;
+  project.status = req.body.status;
+  project.paiddate = req.body.paiddate;
+  project.invdate = req.body.invdate;
+  project.invoiced= req.body.invoiced? "true" : "false";
+  project.desc = req.body.desc;  
+  project._client = req.body._client == "none" ? null : req.body._client; 
+  project._project = req.body._project == "none" ? null : req.body._project; 
   project.save( function( err) {
     if( !err ) {
       return res.redirect('/projects');
@@ -109,7 +124,8 @@ exports.update = function (req, res, next) {
     project.invdate = req.body.invdate;
     project.invoiced= req.body.invoiced? "true" : "false";
     project.desc = req.body.desc;
-    project._client = req.body._client;
+    project._client = req.body._client == "none" ? null : req.body._client; 
+    project._project = req.body._project == "none" ? null : req.body._project; 
     project.save( function( err ) {
       if( !err ) {
         return res.redirect('/projects');

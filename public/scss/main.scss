@@ -1,3 +1,14 @@
+// ~~~~~~*******#######     ______   _______  _______    _______  ______    _______  _______ 
+// ~~~~~~*******#######    |      | |   _   ||       |  |       ||    _ |  |   _   ||       |
+// ~~~~~~*******#######    |  _    ||  |_|  ||_     _|  |_     _||   | ||  |  |_|  ||    _  |
+// ~~~~~~*******#######    | | |   ||       |  |   |      |   |  |   |_||_ |       ||   |_| |
+// ~~~~~~*******#######    | |_|   ||       |  |   |      |   |  |    __  ||       ||    ___|
+// ~~~~~~*******#######    |       ||   _   |  |   |      |   |  |   |  | ||   _   ||   |    
+// ~~~~~~*******#######    |______| |__| |__|  |___|      |___|  |___|  |_||__| |__||___|    
+
+
+
+
 /*------------------------------------*\
     $TABLE OF CONTENTS
 \*------------------------------------*/
@@ -8,7 +19,7 @@
  * * Base.................Base Element Styles
  * * Typography...........Base Type Styles
  * * Utility Classes......Reusable Utilities
- * Sections...............Page Sections
+ * Page Content...........Page Content
  */
 
 
@@ -42,6 +53,12 @@
 
 
 
+
+
+/*------------------------------------*\
+    $PAGE_CONTENT
+\*------------------------------------*/
+
 .edit-btn {
   margin-left: 10px;
   display: inline-block;
@@ -69,6 +86,10 @@
   margin:0 20px 0 0;
   font-weight: 300;
   line-height: 84px;
+  a {
+    color: white;
+    text-decoration: none;
+  }
   img {
     height: 35px;
     margin-right: 16px;
@@ -107,11 +128,6 @@
   }
 }
 
-
-
-
-
-
 main {
   padding:40px 10%;
 }
@@ -120,6 +136,9 @@ main {
   float: right;
   @include clearfix;
 }
+
+
+/*-- $CLIENTS --*/
 
 .client-grouping {
   @include clearfix;
