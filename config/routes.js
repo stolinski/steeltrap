@@ -47,6 +47,13 @@ module.exports = function(app, passport) {
   app.get('/expenses/:id/delete', expenses.delete);  
 
   // =====================================
+  // HOME PAGE (with login links) ========
+  // =====================================
+  app.get('/', function(req, res) {
+    res.render('index.ejs'); // load the index.ejs file
+  });
+
+  // =====================================
   // LOGIN ===============================
   // =====================================
   // show the login form
@@ -80,7 +87,6 @@ module.exports = function(app, passport) {
     failureFlash : true // allow flash messages
   }));
 
-
   // =====================================
   // PROFILE SECTION =====================
   // =====================================
@@ -99,10 +105,7 @@ module.exports = function(app, passport) {
     req.logout();
     res.redirect('/');
   });
-
 };
-
-
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
@@ -113,4 +116,6 @@ function isLoggedIn(req, res, next) {
 
   // if they aren't redirect them to the home page
   res.redirect('/');
-}
+
+};
+

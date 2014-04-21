@@ -1,7 +1,10 @@
 <% layout('../layout') -%>
 
+      <!-- show any messages that come back with authentication -->
+<% if (message.length > 0) { %>
+  <div class="alert alert-danger"><%= message %></div>
+<% } %>
+
 <h2>Dashboard</h2>
 
 <h3>Active</h3>
-
-<%-partial('form')%>

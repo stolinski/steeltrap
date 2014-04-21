@@ -9,3 +9,5 @@ node_modules
 *.sublime-workspace
 
 public/uploads/*
+
+auth.js
