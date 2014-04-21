@@ -28,8 +28,8 @@ var ClientSchema = new Schema({
  
 ClientSchema.plugin(crate, {
   storage: new S3({
-    key: "configAuth.amazonAuth.key",
-    secret: "configAuth.amazonAuth.secret",
+    key: configAuth.amazonAuth.key,
+    secret: configAuth.amazonAuth.secret,
     bucket: "steeltrapp"
   }),
   fields: {
