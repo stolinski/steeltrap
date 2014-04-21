@@ -13,6 +13,8 @@ var mongoose = require('mongoose'),
 /**
  * Client Schema
  */
+var configAuth = require('../../config/auth');
+
 
 var ClientSchema = new Schema({
   name: {type:String, required: true },
@@ -26,8 +28,8 @@ var ClientSchema = new Schema({
  
 ClientSchema.plugin(crate, {
   storage: new S3({
-    key: "AKIAJVGNOG6LOKPJXHTQ",
-    secret: "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",
+    key: "configAuth.amazonAuth.key",
+    secret: "configAuth.amazonAuth.secret",
     bucket: "steeltrapp"
   }),
   fields: {

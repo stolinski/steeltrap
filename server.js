@@ -25,6 +25,7 @@ mongoose.connect( 'mongodb://localhost/library_database' );
 
 require('./config/passport')(passport); // pass passport for configuration
 
+
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
 
