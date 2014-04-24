@@ -29,17 +29,28 @@ gulp.task('styles', function() {
         css: './public/css'
     }))
     .pipe(minifyCSS())
-    .pipe(gulp.dest('./public/css'));
+    .pipe(gulp.dest('./public/css'))
+    .pipe(livereload());
+});
+
+
+// html
+gulp.task('html', function() {
+  return gulp.src('./app/views/**/*')
+    .pipe(plumber())
+    .pipe(livereload());
 });
 
 
 // Rerun the task when a file changes
 gulp.task('watch', function () {
-  gulp.watch('*.html', function(evt) {
+  var server = livereload();
+  gulp.watch('*.ejs', function(evt) {
       server.changed(evt.path);
   });
   gulp.watch(paths.sass, ['styles']);
+  gulp.watch('./app/views/**/*', ['html']);
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['styles','watch']);
+gulp.task('default', ['styles','watch', 'html']);

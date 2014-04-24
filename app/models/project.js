@@ -19,6 +19,7 @@ var ProjectSchema = new Schema({
   status: String,
   desc: String,
   _client: { type: ObjectId, ref: 'Client' },
+  _user: { type: ObjectId, ref: 'User' },
   owed: Number,
   paiddate: Date,
   invdate: Date,

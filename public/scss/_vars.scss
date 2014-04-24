@@ -14,7 +14,7 @@ $gray: #7f8c8d;
 
 $dark-blue: #3498db;
 
-$orange: #e67e22;
+$orange: #E96E57;
 
 $yellow: #f1c40f;
 
@@ -26,6 +26,7 @@ $social: (
   twitter: #00aced,
   youtube: #b00,
   bitbucket: #205081,
+  google: #d34836,
 );
 
 
@@ -34,3 +35,7 @@ $small: 360px;
 $med: 500px;
 $norm: 960px;
 $wide:1200px;
+
+
+$btn:$dark-blue;
+$link: $orange;

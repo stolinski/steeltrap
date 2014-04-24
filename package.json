@@ -23,7 +23,8 @@
     "bcrypt-nodejs" : "latest",
     "express-session" : "latest",
     "connect-flash": "latest",
-    "cookie-parser": "latest"
+    "cookie-parser": "latest",
+    "connect-redis": "latest"
   },
   "devDependencies": {
     "gulp-jshint": "~1.4.0",

@@ -1,7 +1,7 @@
 <article class="project-container <%= project.status %>">
   <div class="project-details">
     <h3><%= project.title %> <a class="edit-btn" href="/projects/<%= project.slug %>/edit"><i class="fa fa-pencil"></i></a></h3>
-    <h4><%= project._client.name %></h4>
+    <% if(project._client) {%><h4><%= project._client.name %></h4><% } %>
     <p>
       <%= project.desc %>
     </p>

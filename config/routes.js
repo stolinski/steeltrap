@@ -27,7 +27,7 @@ module.exports = function(app, passport) {
 
 
   // projects
-  app.get('/projects', projects.index);
+  app.get('/projects', isLoggedIn, projects.index);
   app.get('/projects/json', projects.index);
   app.get('/projects/new', projects.new);
   app.post('/projects/new', projects.create);

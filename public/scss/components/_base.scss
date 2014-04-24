@@ -38,6 +38,7 @@ body {
 input {
   color:#333;
   padding:5px;
+  border:solid 2px #eee;
   @include border-radius(4px);
   @include fs(24px);
 }
@@ -74,23 +75,33 @@ ol {
   }
 }
 
-.btn, input[type='submit'] {
+.btn, input[type='submit'], button {
   cursor: pointer;
-  background:$dark-blue;
+  background:$btn;
   color: white;
   text-decoration: none;
   padding:5px 15px;
   margin-bottom: 20px;
   display: inline-block;
+  border:none;
   @include border-radius(5px);
   @include fs(24px); 
   @include trans;
   &:hover {
-    background: $dark-blue - 40;
+    background: $btn - 40;
   } 
 }
 
-
+/* $social */
+@each $site, $bgcolor in $social {
+// Iterates over the social map to output proper social colors 
+  .btn-#{$site} {
+    background: $bgcolor;
+    &:hover {
+      background: $bgcolor - 40;
+    }
+  }
+}
 
 
 

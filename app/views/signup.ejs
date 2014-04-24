@@ -6,6 +6,7 @@
   <% } %>
 
   <!-- LOGIN FORM -->
+<div class="form-login">
   <form action="/signup" method="post">
     <div class="form-group">
       <label>Email</label>
@@ -15,11 +16,17 @@
       <label>Password</label>
       <input type="password" class="form-control" name="password">
     </div>
-
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input type="password" class="form-control" name="password-confirm">
+    </div>
     <button type="submit" class="btn btn-warning btn-lg">Signup</button>
   </form>
+    <p>Sign up with:</p>
+    <a href="/auth/twitter" class="btn btn-twitter"><span class="fa fa-twitter"></span> Twitter</a>
+    <a href="/auth/google" class="btn btn-google"><span class="fa fa-google-plus"></span> Google+</a>
 
   <hr>
 
   <p>Already have an account? <a href="/login">Login</a></p>
-  <p>Or go <a href="/">home</a>.</p>
+</div>

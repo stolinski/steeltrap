@@ -20,7 +20,7 @@ var Client = mongoose.model('Client');
 
 exports.index = function (req, res) {
   Project
-  .find({ status: 'active' })
+  .find({ status: 'active', _user: req.user })
   .populate('_client')
   .exec(function (err, projects) {
     Project
@@ -95,7 +95,8 @@ exports.create = function (req, res, next) {
   project.paiddate = req.body.paiddate;
   project.invdate = req.body.invdate;
   project.invoiced= req.body.invoiced? "true" : "false";
-  project.desc = req.body.desc;  
+  project.desc = req.body.desc;
+  project._user = req.user;
   project._client = req.body._client == "none" ? null : req.body._client; 
   project._project = req.body._project == "none" ? null : req.body._project; 
   project.save( function( err) {

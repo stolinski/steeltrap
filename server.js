@@ -8,8 +8,12 @@ var express = require('express'),
   multer = require('multer');
   passport = require('passport'),
   session = require('express-session'),
-  flash    = require('connect-flash'),
-  cookieParser = require('cookie-parser');
+  cookieParser = require('cookie-parser'),
+  RedisStore = require('connect-redis')(session),
+  flash    = require('connect-flash');
+
+
+
 
 
 var app = express();
@@ -19,11 +23,12 @@ app.use(express.static("public"));
 app.use(bodyParser());
 app.use(multer({ dest: __dirname + '/public/uploads'}));
 
-app.use(middleware.helpers);
 
 
-//Connect to database
-mongoose.connect( 'mongodb://localhost/library_database' );
+var configDB = require('./config/database.js');
+
+// configuration ===============================================================
+mongoose.connect(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -34,7 +39,7 @@ app.engine('ejs', engine);
 app.use(cookieParser()); // read cookies (needed for auth)
 
 // required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({ store: new RedisStore(), secret: 'yoyoyoyo' }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -62,6 +67,7 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 });
 
 // routes configuration
+app.use(middleware.helpers);
 require('./config/routes')(app, passport);
 
 
