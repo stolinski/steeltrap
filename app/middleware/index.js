@@ -24,6 +24,11 @@ exports.helpers = function (req, res, next) {
     return  value > 0 ? 'red' : '';
   };
 
+  loggedIn = function () {
+    console.log(req.isAuthenticated());
+    return req.isAuthenticated();
+  };
+
   next();
   
 };

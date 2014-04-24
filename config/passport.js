@@ -2,9 +2,15 @@
 
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
+var TwitterStrategy  = require('passport-twitter').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 // load up the user model
-var User          = require('../app/models/user');
+var User = require('../app/models/user');
+
+
+// load the auth variables
+var configAuth = require('./auth');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -26,6 +32,161 @@ module.exports = function(passport) {
             done(err, user);
         });
     });
+
+
+    // =========================================================================
+    // GOOGLE ==================================================================
+    // =========================================================================
+    passport.use(new GoogleStrategy({
+
+        clientID        : configAuth.googleAuth.clientID,
+        clientSecret    : configAuth.googleAuth.clientSecret,
+        callbackURL     : configAuth.googleAuth.callbackURL,
+        passReqToCallback : true
+
+    },
+    function(req, token, refreshToken, profile, done) {
+
+        // make the code asynchronous
+        // User.findOne won't fire until we have all our data back from Google
+        process.nextTick(function() {
+
+            if(!req.user) {
+            // try to find the user based on their google id
+                User.findOne({ 'google.id' : profile.id }, function(err, user) {
+                    if (err)
+                        return done(err);
+    
+                    if (user) {
+    
+                        if (!user.google.token) {
+                            user.google.id    = profile.id;
+                            user.google.token = token;
+                            user.google.name  = profile.displayName;
+                            user.google.email = profile.emails[0].value; // pull the first email
+
+                            user.save(function(err) {
+                                if (err)
+                                    throw err;
+                                return done(null, user);
+                            });
+                        }
+
+                    } else {
+                        // if the user isnt in our database, create a new user
+                        var newUser          = new User();
+    
+                        // set all of the relevant information
+                        newUser.google.id    = profile.id;
+                        newUser.google.token = token;
+                        newUser.google.name  = profile.displayName;
+                        newUser.google.email = profile.emails[0].value; // pull the first email
+    
+                        // save the user
+                        newUser.save(function(err) {
+                            if (err)
+                                throw err;
+                            return done(null, newUser);
+                        });
+                    }
+                });
+
+            } else {
+                var user = req.user;
+                user.google.id    = profile.id;
+                user.google.token = token;
+                user.google.name  = profile.displayName;
+                user.google.email = profile.emails[0].value;
+
+                user.save(function(err) {
+                    if(err)
+                        throw err;
+                    return done(null,user);
+                });
+            }
+        });
+
+    }));
+
+
+    // =========================================================================
+    // TWITTER =================================================================
+    // =========================================================================
+    passport.use(new TwitterStrategy({
+
+        consumerKey     : configAuth.twitterAuth.consumerKey,
+        consumerSecret  : configAuth.twitterAuth.consumerSecret,
+        callbackURL     : configAuth.twitterAuth.callbackURL,
+        passReqToCallback : true
+    },
+    function(req, token, tokenSecret, profile, done) {
+
+        // make the code asynchronous
+    // User.findOne won't fire until we have all our data back from Twitter
+        process.nextTick(function() {
+            if(!req.user) {
+                User.findOne({ 'twitter.id' : profile.id }, function(err, user) {
+    
+                    // if there is an error, stop everything and return that
+                    // ie an error connecting to the database
+                    if (err)
+                        return done(err);
+    
+                    // if the user is found then log them in
+                    if (user) {
+                        // if there is a user id already but no token (user was linked at one point and then removed)
+                        // just add our token and profile information
+                        if (!user.twitter.token) {
+                            user.twitter.token = token;
+                            user.twitter.username    = profile.username;
+                            user.twitter.displayName = profile.displayName;
+
+                            user.save(function(err) {
+                                if (err)
+                                    throw err;
+                                return done(null, user);
+                            });
+                        }
+
+                    } else {
+                        // if there is no user, create them
+                        var newUser                 = new User();
+    
+                        // set all of the user data that we need
+                        newUser.twitter.id          = profile.id;
+                        newUser.twitter.token       = token;
+                        newUser.twitter.username    = profile.username;
+                        newUser.twitter.displayName = profile.displayName;
+    
+                        // save our user into the database
+                        newUser.save(function(err) {
+                            if (err)
+                                throw err;
+                            return done(null, newUser);
+                        });
+                    }
+                });
+            } else {
+                var user = req.user;
+                user.twitter.id          = profile.id;
+                user.twitter.token       = token;
+                user.twitter.username    = profile.username;
+                user.twitter.displayName = profile.displayName;
+    
+
+                user.save(function(err) {
+                    if(err)
+                        throw err;
+                    return done(null,user);
+                });
+            }
+
+    });
+
+    }));
+
+
+
 
   // =========================================================================
     // LOCAL SIGNUP ============================================================

@@ -19,6 +19,8 @@ app.use(express.static("public"));
 app.use(bodyParser());
 app.use(multer({ dest: __dirname + '/public/uploads'}));
 
+app.use(middleware.helpers);
+
 
 //Connect to database
 mongoose.connect( 'mongodb://localhost/library_database' );
@@ -41,7 +43,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'ejs');
 
-app.use(middleware.helpers);
+
 app.locals.moment = require('moment');
 
 
