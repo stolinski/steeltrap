@@ -4,9 +4,9 @@
 <% if (message.length > 0) { %>
   <div class="alert alert-danger"><%= message %></div>
 <% } %>
-    <p>Login or Register with:</p>
 
 <% if(!loggedIn()) { %>
+  <p>Login or Register with:</p>
   <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
   <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
   <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
