@@ -7,7 +7,7 @@
 
 <% if(!loggedIn()) { %>
 <div class="form-login">
-  <h3>Login:</h3>
+  <h2><span class="fa fa-sign-in"> Login</h2>
     <form action="/login" method="post">
     <div class="form-group">
       <label>Email</label>
@@ -20,19 +20,19 @@
     <button type="submit" class="btn btn-warning btn-lg">Login</button>
   </form>
 
-  <p>Login with:</p>
+  <p>or login with:</p>
   <a href="/auth/twitter" class="btn btn-twitter"><span class="fa fa-twitter"></span> Twitter</a>
   <a href="/auth/google" class="btn btn-google"><span class="fa fa-google-plus"></span> Google+</a>
 
   <hr />
   <p>
-    Don't have an account? <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
+    Don't have an account? <br /> <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
   </p>
 </div>
 <% } else { %>
 <a href="/logout" class="btn btn-default btn-sm">Logout</a>
 <h2>Dashboard</h2>
 
-<h3>Active</h3>
+<h3>Active Projects</h3>
 
 <% } %>

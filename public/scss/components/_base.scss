@@ -11,7 +11,7 @@ html, body {
 
 body {
   background: #eee;
-  color:#333;
+  color:$dark;
   font-family: 'Lato', sans-serif;
 }
 
@@ -81,15 +81,22 @@ ol {
   color: white;
   text-decoration: none;
   padding:5px 15px;
-  margin-bottom: 20px;
   display: inline-block;
   border:none;
+  text-transform: uppercase;
+  font-weight:300;
+  margin:10px 0;
   @include border-radius(5px);
-  @include fs(24px); 
+  @include fs(22px); 
   @include trans;
   &:hover {
     background: $btn - 40;
   } 
+}
+
+button.btn {
+  margin:20px 0 40px;
+  font-family: 'Lato', sans-serif;
 }
 
 /* $social */

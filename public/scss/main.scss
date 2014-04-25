@@ -79,6 +79,7 @@
     float: left;
     margin-top: 40px;
   }
+  border-bottom: 4px solid $orange;
 }
 
 .site-title {
@@ -107,10 +108,12 @@
         display: block;
         text-decoration: none;
         color:#eee;
+        background: $dark;
         @include trans;
         padding: 20px 20px 16px;
         border-bottom: 4px dotted $dark;
         &:hover {
+          background: $dark + 20;
           border-bottom: 4px solid $link;
           i {
             top:-4px;
@@ -143,10 +146,32 @@ main {
   border:solid 1px #eee;
   @include border-radius(5px);
   padding: 20px;
-  width: 40%;
+  width: 50%;
   float: left;
 }
 
+
+/*-- $PROFILE --*/
+
+.profile-container {
+  
+}
+
+.profile-type {
+  background: white;
+  width: 49%;
+  float: left;
+  padding: 20px;
+  @include trans;
+  @include border-radius(5px);
+  @include box-shadow(1px 1px 4px rgba(black, 0.0));
+  &:nth-child(even) {
+    margin-left: 2%;
+  }
+  &:hover {
+    @include box-shadow(1px 1px 4px rgba(black, 0.2));
+  }
+}
 
 
 /*-- $CLIENTS --*/

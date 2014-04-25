@@ -10,8 +10,8 @@ var fs = require('fs'),
  * Models
  */
 
-var Client = mongoose.model('Client');
-
+var Client = mongoose.model('Client'),
+    Project = mongoose.model('Project');
 
 /**
  * Index
@@ -19,5 +19,10 @@ var Client = mongoose.model('Client');
  */
 
 exports.index = function (req, res, next) {
-  return res.render('home',{ message: req.flash('loginMessage') });
+  Project
+    .find({ status: 'active', _user: req.user })
+    .populate('_client')
+    .exec(function (err, projects) {
+      return res.render('home',{ message: req.flash('loginMessage') });
+    });
 };
