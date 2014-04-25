@@ -46,8 +46,7 @@ ClientSchema.plugin(crate, {
             format: ".jpg"
           },
           medium: {
-            resize: "300",
-            crop: "300x187+30+15",
+            crop: "350x187+30+15",
             format: ".jpg"
           }
         }

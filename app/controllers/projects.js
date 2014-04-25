@@ -57,6 +57,7 @@ exports.show = function (req, res, next) {
 exports.new = function (req, res, next) {
   var project = new Project();
   res.locals._project = project;
+  res.locals.slug = req.params.slug;
   Client.find({ status: 'active' },function(err, clients) {
     res.locals.clients = clients;
     return res.render('projects/new');

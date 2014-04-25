@@ -1,4 +1,4 @@
-<form method="post">
+<form method="post" class="content-form">
   <input value="<%= _project.title? _project.title : '' %>" type="text" name="title" placeholder="Title" />
   <textarea type="textarea" name="desc" placeholder="Project Description" /><%= _project.desc? _project.desc : '' %></textarea>
   
@@ -23,20 +23,20 @@
   </label>  
 
   <label>Status: 
-    <select name="status">
+  <span class="select"><select name="status">
       <option <%= _project.status == "potential" ? "selected" : "" %> value="potential">Potential</option>
       <option <%= _project.status == "active" ? "selected" : "" %> value="active">Active</option>
       <option <%= _project.status == "completed" ? "selected" : "" %> value="completed">Completed</option>
       <option <%= _project.status == "neverwas" ? "selected" : "" %> value="neverwas">Neverwas</option>
-    </select>
+    </select></span>
   </label>
   <label>Client: 
-    <select name="_client">
+    <span class="select"><select name="_client">
       <option value="none">None</option>
     <% clients.forEach(function(client){ %>
-      <option value="<%= client._id %>"><%= client.name %></option>
+      <option <%= client._id == slug ? 'selected': '' %> value="<%= client._id %>"><%= client.name %></option>
     <% }); %>
-    </select>
+    </select></span>
   </label>
   <input type="submit" />
 </form>
