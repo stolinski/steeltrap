@@ -38,7 +38,8 @@ ProjectSchema.pre('validate', function(next) {
  * Pre-save hook
  */
 
-ProjectSchema.pre('save', function(next) {
+ProjectSchema.pre('save', function(next, req, callback) {
+  this._user = req.user;
   this.slug = toSlug(this.title);
   this.owed = this.cost - this.paid;
   next();

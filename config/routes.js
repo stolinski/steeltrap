@@ -6,6 +6,7 @@ var clients = require('../app/controllers/clients'),
   projects = require('../app/controllers/projects'), 
   expenses = require('../app/controllers/expenses'), 
   home = require('../app/controllers/home');
+  events = require('../app/controllers/events');
 
 
 module.exports = function(app, passport) {
@@ -46,7 +47,12 @@ module.exports = function(app, passport) {
   app.post('/expenses/:id/edit', expenses.update);
   app.get('/expenses/:id/delete', expenses.delete);  
 
-
+  // events
+  app.get('/events', events.index);
+  // app.get('/events/json', events.index);
+  // app.post('/events/new', events.create);
+  // app.post('/events/:id/edit', events.update);
+  // app.get('/events/:id/delete', events.delete);  
 
 
   // show the login form

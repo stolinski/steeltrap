@@ -200,8 +200,9 @@ main {
   width: 100%;
   padding:160px 3%  15px;
   background: white;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   min-height: 400px;
+  max-width: 350px;
   @include trans;
   @include clearfix;
   @include border-radius(5px);

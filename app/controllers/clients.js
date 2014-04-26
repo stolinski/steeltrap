@@ -85,14 +85,16 @@ exports.edit = function (req, res, next) {
 
 exports.create = function (req, res, next) {
   var client = new Client(req.body);
-  console.log(req.files);
-  console.log(req.body);
+  client._user = req.user;
   client.attach('image', req.files.image, function(err) {
     if(err) return next(err);
-    client.save( function( err) {
+    client.save(function(err) {
+      console.log( 'made it past save' );
       if( !err ) {
+        console.log( 'made it no error' );
         return res.redirect('/clients');
       } else {
+        console.log( 'error' );
         console.log( err );
       }
     });
@@ -112,6 +114,7 @@ exports.update = function (req, res, next) {
     client.contact = req.body.contact;
     client.email = req.body.email;
     client.status = req.body.status;
+    client._user = req.user;
     client.save( function( err ) {
       if( !err ) {
         return res.redirect('/clients');

@@ -8,7 +8,8 @@ var mongoose = require('mongoose'),
   crate = require("mongoose-crate"),
   ImageMagick = require("mongoose-crate-imagemagick"),
   S3 = require("mongoose-crate-s3"),
-  gravatar = require('gravatar');
+  gravatar = require('gravatar'),
+  ObjectId = mongoose.Schema.Types.ObjectId;
 
 /**
  * Client Schema
@@ -23,6 +24,7 @@ var ClientSchema = new Schema({
   email: String,
   status: String,
   grav: String,
+  _user: { type: ObjectId, ref: 'User' },
 });
 
  
@@ -73,6 +75,7 @@ ClientSchema.pre('validate', function(next) {
 ClientSchema.pre('save', function(next) {
   this.slug = toSlug(this.name);
   this.grav = gravatar.url(this.email, {s: '200', r: 'pg', d: 'mm'});
+  console.log( 'made it pre-save' );
   next();
 });
 
