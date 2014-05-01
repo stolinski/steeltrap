@@ -9,6 +9,11 @@ var mongoose = require('mongoose'),
 /**
  * Project Schema
  */
+var Todo = new Schema({
+    title     : String,
+    complete: { type:Boolean, default:false }
+});
+
 
 var ProjectSchema = new Schema({
   title: {type:String, required: true },
@@ -20,6 +25,7 @@ var ProjectSchema = new Schema({
   desc: String,
   _client: { type: ObjectId, ref: 'Client' },
   _user: { type: ObjectId, ref: 'User' },
+  todos: [Todo],
   owed: Number,
   paiddate: Date,
   invdate: Date,
@@ -38,8 +44,7 @@ ProjectSchema.pre('validate', function(next) {
  * Pre-save hook
  */
 
-ProjectSchema.pre('save', function(next, req, callback) {
-  this._user = req.user;
+ProjectSchema.pre('save', function(next) {
   this.slug = toSlug(this.title);
   this.owed = this.cost - this.paid;
   next();

@@ -20,11 +20,11 @@ var Client = mongoose.model('Client');
  */
 
 exports.index = function (req, res) {
-  Client.find({ status: 'active' },function(err, clients) {
+  Client.find({ status: 'active', _user: req.user  },function(err, clients) {
     if (req.url.indexOf('/json') > -1) return res.send(clients); // json
-    Client.find({ status: 'inactive' }, function (err, iaclients) {
-      Client.find({ status: 'potential' }, function (err, potential) {
-        Client.find({ status: 'neverwas' }, function (err, neverwas) {
+    Client.find({ status: 'inactive', _user: req.user  }, function (err, iaclients) {
+      Client.find({ status: 'potential', _user: req.user  }, function (err, potential) {
+        Client.find({ status: 'neverwas', _user: req.user  }, function (err, neverwas) {
           res.locals.clients = clients;
           res.locals.iaclients = iaclients;
           res.locals.potential = potential;

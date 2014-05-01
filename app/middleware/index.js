@@ -25,7 +25,6 @@ exports.helpers = function (req, res, next) {
   };
 
   loggedIn = function () {
-    console.log(req.isAuthenticated());
     return req.isAuthenticated();
   };
 

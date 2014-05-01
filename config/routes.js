@@ -37,7 +37,8 @@ module.exports = function(app, passport) {
   app.get('/projects/:slug/json', projects.show);
   app.get('/projects/:slug/edit', projects.edit);
   app.post('/projects/:slug/edit', projects.update);
-  app.get('/projects/:id/delete', projects.delete);  
+  app.get('/projects/:id/delete', projects.delete); 
+  app.post('/projects/todo', projects.todoadd); 
 
 
   // expenses

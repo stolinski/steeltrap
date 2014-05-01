@@ -14,4 +14,17 @@
     Invoice Date: <%= moment(project.invdate).format('MM/DD/YYYY') %><br />
     Paid Date: <%= moment(project.paiddate).format('MM/DD/YYYY') %>
   </div>
+  <div>
+  <h4>Todos:</h4>
+  <ul class="todos-list">
+  <% if(project.todos.length > 0) { %>
+    <% project.todos.forEach(function(todo){ %>
+      <li class=""><%= todo.title %></li>
+    <% }); %>
+  <%  } else { %>
+    <li class="no-todos-item">No Todos</li>
+  <% } %>
+  </ul>
+  <input placeholder="New Todo" type="text" name="title" class="todo-input"/>
+  <button href="#" data-id="<%= project._id %>" class="update-todo">PUSHME</button>
 </article>

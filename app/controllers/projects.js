@@ -110,6 +110,19 @@ exports.create = function (req, res, next) {
 };
 
 
+exports.todoadd = function (req, res, next) {
+  console.log(req.body.title);
+  Project.findById( req.body.id, function( err, project ) {
+    if (!project) return next();
+    project.todos.push({ title: req.body.title });
+    project.save(function (err) {
+      if (!err) console.log('Added Todo');
+      return res.send( req.body.title );
+    });
+  });
+};
+
+
 
 /**
  * Update
