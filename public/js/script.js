@@ -34,7 +34,7 @@ $(function() {
 
     var data = {};
     data.id = $(this).data('id');
-    data.parent = $('.update-todo').data('id');
+    data.parent = $(this).data('parent');
 
     $.ajax({
       type: 'POST',
