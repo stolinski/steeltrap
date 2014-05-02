@@ -100,7 +100,7 @@ exports.create = function (req, res, next) {
   project._user = req.user;
   project._client = req.body._client == "none" ? null : req.body._client; 
   project._project = req.body._project == "none" ? null : req.body._project; 
-  project.save(req, function( err) {
+  project.save(function( err) {
     if( !err ) {
       return res.redirect('/projects');
     } else {
