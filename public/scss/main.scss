@@ -173,6 +173,9 @@ main {
   }
 }
 
+.todo-wrapper {
+  
+}
 
 /*-- $CLIENTS --*/
 
@@ -372,13 +375,42 @@ main {
   @include clearfix;
   @include border-radius(5px);
   .project-details {
-    float: left;
+    @include clearfix;
   }
   .project-money {
     float: right;
   }
   &:hover {
     .edit-btn {
+      opacity: 1;
+    }
+  }
+}
+
+.todos-list {
+  .complete {
+    text-decoration:line-through;
+    opacity: 0.5;
+    &:before {
+      opacity: 1; 
+    }
+  }
+}
+
+.todo-item {
+  margin-bottom: 5px;
+  cursor: pointer;
+  @include trans;
+  &:before {
+    content: '\f00c';
+    font-family:'FontAwesome';
+    color:$red;
+    opacity: 0.1;
+    margin-right: 10px;
+    @include trans(0.1s);
+  }
+  &:hover {
+    &:before {
       opacity: 1;
     }
   }

@@ -122,6 +122,21 @@ exports.todoadd = function (req, res, next) {
   });
 };
 
+exports.todoedit = function (req, res, next) {
+  Project.findById( req.body.parent, function( err, project ) { 
+    var todo = project.todos.id(req.body.id);
+    if (todo.complete) {
+      todo.complete = false;
+    } else {
+      todo.complete = true;
+    }
+    project.save(function (err) {
+      if (!err) console.log('Updated Todo');
+      return res.send( [todo.complete, req.body.id] );
+    });
+  });
+};
+
 
 
 /**

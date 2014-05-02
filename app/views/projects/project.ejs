@@ -1,11 +1,6 @@
 <article class="project-container <%= project.status %>">
+  
   <div class="project-details">
-    <h3><%= project.title %> <a class="edit-btn" href="/projects/<%= project.slug %>/edit"><i class="fa fa-pencil"></i></a></h3>
-    <% if(project._client) {%><h4><%= project._client.name %></h4><% } %>
-    <p>
-      <%= project.desc %>
-    </p>
-  </div>
   <div class="project-money">
     Cost: $<%= project.cost %><br />
     Paid: $<%= project.paid %><br />
@@ -14,17 +9,24 @@
     Invoice Date: <%= moment(project.invdate).format('MM/DD/YYYY') %><br />
     Paid Date: <%= moment(project.paiddate).format('MM/DD/YYYY') %>
   </div>
-  <div>
-  <h4>Todos:</h4>
-  <ul class="todos-list">
-  <% if(project.todos.length > 0) { %>
-    <% project.todos.forEach(function(todo){ %>
-      <li class=""><%= todo.title %></li>
-    <% }); %>
-  <%  } else { %>
-    <li class="no-todos-item">No Todos</li>
-  <% } %>
-  </ul>
-  <input placeholder="New Todo" type="text" name="title" class="todo-input"/>
-  <button href="#" data-id="<%= project._id %>" class="update-todo">PUSHME</button>
+    <h3><%= project.title %> <a class="edit-btn" href="/projects/<%= project.slug %>/edit"><i class="fa fa-pencil"></i></a></h3>
+    <% if(project._client) {%><h4><%= project._client.name %></h4><% } %>
+    <p>
+      <%= project.desc %>
+    </p>
+  </div>
+  <div class="todo-wrapper">
+    <h4>Todos:</h4>
+    <ul class="todos-list">
+    <% if(project.todos.length > 0) { %>
+      <% completed(project.todos).forEach(function(todo){ %>
+        <li data-id="<%= todo._id %>" class="todo-item <%= todo.complete ? 'complete' : 'not-complete' %>"><%= todo.title %></li>
+      <% }); %>
+    <%  } else { %>
+      <li class="no-todos-item">No Todos</li>
+    <% } %>
+    </ul>
+    <input placeholder="New Todo" type="text" name="title" class="todo-input"/>
+    <button href="#" data-id="<%= project._id %>" class="update-todo">Add Todo</button>
+  </div>
 </article>

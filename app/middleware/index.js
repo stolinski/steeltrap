@@ -28,6 +28,12 @@ exports.helpers = function (req, res, next) {
     return req.isAuthenticated();
   };
 
+
+  completed = function(list) {
+    var todos = _.filter(list, function(todo){ return todo.complete === false; });
+    return todos;
+  };
+
   next();
   
 };

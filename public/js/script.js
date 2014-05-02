@@ -23,9 +23,31 @@ $(function() {
       contentType: 'application/json',
       url: '/projects/todo/',            
       success: function(data) {
-        $('.todos-list').append('<li>'+ data +'</li>');
+        $('.todos-list').append('<li class="not-complete">'+ data +'</li>');
         $('.todo-input').val('');
       }
     });
   });
+
+  $('.todo-item').click(function(e){
+    e.preventDefault();
+
+    var data = {};
+    data.id = $(this).data('id');
+    data.parent = $('.update-todo').data('id');
+
+    $.ajax({
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      url: '/projects/todo/edit/',            
+      success: function(data) {
+        if(data[0]) {
+          $('*[data-id="'+ data[1] +'"]').removeClass('not-complete').addClass('complete');
+        } else {
+          $('*[data-id="'+ data[1] +'"]').removeClass('complete').addClass('not-complete');
+        }
+      }
+    });
+  });  
 });
