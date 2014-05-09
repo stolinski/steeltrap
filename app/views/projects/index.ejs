@@ -8,3 +8,8 @@
 
 <h3>Inactive Projects</h3>
 <%-partial('project',iaprojects)%>
+
+<% allproj.forEach(function(proj){ %>
+	<%= proj.paiddate ? moment(proj.paiddate).format('MM/DD/YYYY') : ''  %>
+	<%= proj.paid %>
+<% }); %>

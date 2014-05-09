@@ -73,7 +73,7 @@
   @include clearfix;
   background: $dark; 
   color:#eee;
-  padding:0 10%;
+  padding:0 2%;
   span {
     display: block;
     float: left;
@@ -138,6 +138,20 @@ main {
 .new-client-btn, .new-project-btn  {
   float: right;
   @include clearfix;
+}
+
+
+.feature-nav {
+  position: fixed;
+  top:88px;
+  bottom:0;
+  padding: 20px;
+  background: $orange + 20;
+  a {
+    color:white;
+    text-decoration: none;
+    @include fs(20px);
+  }
 }
 
 /*-- $HOMEPAGE --*/

@@ -29,17 +29,29 @@
     <header class="header">
       <h2 class="site-title"><a href="/"><img src="/img/logo.svg" />SteelTrap</a></h2>
       <span>A <i>personal</i>, personal assistant</span>
-      <% if(loggedIn()) { %>
+      
       <nav class="site-nav">
+        <ul>
+        <% if(loggedIn()) { %>
+          <li><a href="/profile"><i class="fa fa-user"></i>Profile</a></li>
+          <li><a href="/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
+          <% } else { %>
+          <li><a href="/login"><i class="fa fa-sign-in"></i>Login</a></li>
+          <li><a href="/signup"><i class="fa fa-key"></i>Signup</a></li>
+          <% } %>
+        </ul>
+      </nav>
+    </header>
+    <aside class="feature-nav">
+      <% if(loggedIn()) { %>
         <ul>
           <li><a href="/clients"><i class="fa fa-users"></i>Clients</a></li>
           <li><a href="/projects"><i class="fa fa-briefcase"></i>Projects</a></li>
           <li><a href="/events"><i class="fa fa-calendar"></i>Events</a></li>
           <li><a href="/expenses"><i class="fa fa-dollar"></i>Expenses</a></li>
         </ul>
-      </nav>
       <% } %>
-    </header>
+    </aside>
     <main>
     <%- body %>
     </main>

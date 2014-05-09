@@ -28,7 +28,15 @@ exports.index = function (req, res) {
       .populate('_client')
       .exec(function (err, iaprojects) {
         res.locals.iaprojects = iaprojects;
-        return res.render('projects', {projects:projects});
+        Project
+          .find()
+          .where('paid')
+          .gt(0)
+          .exec( function(err, allproj) {
+          res.locals.allproj = allproj;
+          return res.render('projects', {projects:projects});
+        });
+        
     });  
   });
 };
