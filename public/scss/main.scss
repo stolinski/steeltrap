@@ -74,6 +74,8 @@
   background: $dark; 
   color:#eee;
   padding:0 2%;
+  position: relative;
+  z-index: 110;
   span {
     display: block;
     float: left;
@@ -132,7 +134,7 @@
 }
 
 main {
-  padding:40px 10%;
+  padding:40px 2% 40px 240px;
 }
 
 .new-client-btn, .new-project-btn  {
@@ -143,14 +145,28 @@ main {
 
 .feature-nav {
   position: fixed;
-  top:88px;
+  top:0;
   bottom:0;
-  padding: 20px;
+  padding: 20px 0;
   background: $orange + 20;
+  padding-top: 88px;
+  z-index: 100;
   a {
+    display: block;
     color:white;
     text-decoration: none;
-    @include fs(20px);
+    padding: 15px 40px;
+    @include fs(26px);
+    @include trans;
+    &:hover {
+      background: $orange;
+    }
+    i {
+      margin-right: 10px;
+      display: inline-block;
+      width: 25px;
+      text-align: center;
+    }
   }
 }
 
