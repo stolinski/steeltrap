@@ -1,6 +1,5 @@
 # Require any additional compass plugins installed on your system.
 require 'compass-normalize'
-require 'rgbapng'
 require 'toolkit'
 require 'breakpoint'
 require 'sass-globbing'
