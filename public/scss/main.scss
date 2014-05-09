@@ -416,6 +416,11 @@ main {
   }
 }
 
+.update-todo {
+  @include fs(17px);
+  background: $dark-red;
+}
+
 .expense-form {
   
 }

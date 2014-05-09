@@ -11,7 +11,7 @@
     "body-parser" : "latest",
     "moment": "latest",
     "mongoose-crate-s3": "latest",
-    "mongoose-crate" : "latest",
+    "mongoose-crate" : "1.0.4",
     "mongoose-crate-imagemagick" : "latest",
     "multer": "latest",
     "gravatar" : "latest",
