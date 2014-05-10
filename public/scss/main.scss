@@ -94,8 +94,8 @@
     text-decoration: none;
   }
   img {
-    height: 35px;
-    margin-right: 16px;
+    height: 40px;
+    margin-right: 20px;
   }
 }
 
@@ -151,6 +151,7 @@ main {
   background: $orange + 20;
   padding-top: 88px;
   z-index: 100;
+  width: 221px;
   a {
     display: block;
     color:white;
@@ -160,12 +161,17 @@ main {
     @include trans;
     &:hover {
       background: $orange;
+      padding-left:30px;
+      i {
+        margin-right: 15px;
+      }
     }
     i {
       margin-right: 10px;
       display: inline-block;
       width: 25px;
       text-align: center;
+      @include trans;
     }
   }
 }
@@ -446,9 +452,16 @@ main {
   }
 }
 
+.todo-input {
+  @include fs(20px);
+  padding: 2px;
+  margin-top: 8px;
+  float: left;
+}
+
 .update-todo {
+  margin:8px 0;
   @include fs(17px);
-  background: $dark-red;
 }
 
 .expense-form {
