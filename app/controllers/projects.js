@@ -197,7 +197,7 @@ exports.delete = function (req, res, next) {
         return project.remove( function( err ) {
             if( !err ) {
                 console.log( 'Project Removed' );
-                return response.send( '' );
+                return res.redirect('/projects');
             } else {
                 console.log( err );
             }
