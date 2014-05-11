@@ -52,6 +52,12 @@
 @import 'components/**/*';
 
 
+.hidden {
+  display: none !important;
+}
+
+
+
 
 
 
@@ -152,6 +158,9 @@ main {
   padding-top: 88px;
   z-index: 100;
   width: 221px;
+  ul {
+    margin-top: 40px;
+  }
   a {
     display: block;
     color:white;
@@ -176,7 +185,9 @@ main {
   }
 }
 
+
 /*-- $HOMEPAGE --*/
+
 .form-login {
   background: white;
   border:solid 1px #eee;
@@ -198,6 +209,8 @@ main {
   width: 49%;
   float: left;
   padding: 20px;
+  min-height:180px;
+  margin-bottom: 20px;
   @include trans;
   @include border-radius(5px);
   @include box-shadow(1px 1px 4px rgba(black, 0.0));
@@ -224,11 +237,13 @@ main {
 .client-status-container {
   @include clearfix;
   @include breakpoint($norm) {
-    width: 49%;
-    float: left;
     &:nth-child(odd) {
       margin-right: 2%;
     }    
+  }
+  @include breakpoint($wide) {
+    width: 49%;
+    float: left;
   }
 }
 
@@ -421,7 +436,27 @@ main {
       opacity: 1;
     }
   }
+  &:hover h4:after {
+    opacity: 1;
+  }
 }
+
+.todo-wrapper {
+  h4 {
+    &:after {
+      content: $fa-var-plus-circle;;
+      font-family: 'FontAwesome';
+      margin-left: 10px;
+      cursor: pointer;
+      display: inline-block;
+      opacity: 0;
+      @include fs(18px);
+      color: $gray;
+      @include trans;
+    }
+  }
+}
+
 
 .todos-list {
   .complete {

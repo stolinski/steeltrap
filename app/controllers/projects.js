@@ -79,11 +79,14 @@ exports.new = function (req, res, next) {
  */
 
 exports.edit = function (req, res, next) {
-  Project.findOne({ 'slug': req.params.slug }, function (err, project) {
+  Project.findOne({ 'slug': req.params.slug })
+    .populate('_client')
+    .exec(function (err, project) {
     if (!project) return next();
     res.locals._project = project;
       Client.find({ status: 'active' },function(err, clients) {
         res.locals.clients = clients;
+        res.locals.slug = req.params.slug;
         return res.render('projects/edit'); // html
       });
   });

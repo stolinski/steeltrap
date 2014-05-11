@@ -16,7 +16,7 @@
     </p>
   </div>
   <div class="todo-wrapper">
-    <h4>Todos:</h4>
+    <h4>Todos</h4>
     <ul class="todos-list">
     <% if(project.todos.length > 0) { %>
       <% completed(project.todos).forEach(function(todo){ %>
@@ -26,7 +26,10 @@
       <li class="no-todos-item">No Todos</li>
     <% } %>
     </ul>
-    <input placeholder="New Todo" type="text" name="title" class="todo-input"/>
-    <button href="#" data-id="<%= project._id %>" class="update-todo">Add Todo</button>
+    <div class="new-todo hidden">
+      <input placeholder="New Todo" type="text" name="title" class="todo-input"/>
+      <button href="#" data-id="<%= project._id %>" class="update-todo">Add Todo</button>      
+    </div>
+
   </div>
 </article>

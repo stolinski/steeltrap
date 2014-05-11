@@ -30,14 +30,21 @@
       <option <%= _project.status == "neverwas" ? "selected" : "" %> value="neverwas">Neverwas</option>
     </select></span>
   </label>
+
   <label>Client: 
     <span class="select"><select name="_client">
       <option value="none">None</option>
     <% clients.forEach(function(client){ %>
-      <option <%= client._id == slug ? 'selected': '' %> value="<%= client._id %>"><%= client.name %></option>
+
+      <option <% if(_project._client){%> 
+      <%= (client.id === _project._client.id) ? 'selected': 'nope' %>
+      <% } %>
+        value="<%= client._id %>">
+        <%= client.name %>
+      </option>
+
     <% }); %>
     </select></span>
   </label>
   <input type="submit" />
 </form>
-
