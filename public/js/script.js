@@ -1,4 +1,5 @@
-google.load('visualization', '1', {packages: ['corechart']});
+google.load("visualization", "1.1", {packages:["calendar"]});
+      
 
 $(function() {
   $('.client-edit-btn').on('click', function() {

@@ -20,6 +20,11 @@
  * * Typography...........Base Type Styles
  * * Utility Classes......Reusable Utilities
  * Page Content...........Page Content
+ * * Homepage.............Homepage
+ * * Clients..............Clients
+ * * Projects.............Projects
+ * * Events...............Events
+ * * Expenses.............Expenses
  */
 
 
@@ -418,6 +423,13 @@ main {
 }
 
 
+/*-- $PROJECTS --*/
+
+#visualization {
+  margin: 60px 0 20px;
+  height: 200px;
+}
+
 .project-container {
   padding:15px 1.5%;
   background: white;
@@ -441,6 +453,7 @@ main {
   }
 }
 
+/* $todos */
 .todo-wrapper {
   h4 {
     &:after {

@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies
  */
@@ -190,4 +189,3 @@ exports.delete = function (req, res, next) {
         });
     });
 };
-
