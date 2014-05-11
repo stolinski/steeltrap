@@ -8,16 +8,18 @@
 
 
 <h3>Current Projects</h3>
-<%-partial('project',projects)%>
+<%-partial('project', projects)%>
 
 <h3>Potential Projects</h3>
-<%-partial('project',pprojects)%>
+<% if(pprojects) { %>
+	<%-partial('project', pprojects)%>
+<% } %>
 
 <h3>Inactive Projects</h3>
-<%-partial('project',iaprojects)%>
+<%-partial('project', iaprojects) %>
 
 <h3>Neverwas Projects</h3>
-<%-partial('project',nprojects)%>
+<%-partial('project', nprojects)%>
 
 
 
