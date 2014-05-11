@@ -22,20 +22,35 @@ exports.index = function (req, res) {
   .find({ status: 'active', _user: req.user })
   .populate('_client')
   .exec(function (err, projects) {
+
     Project
       .find({ status: 'inactive' })
       .populate('_client')
       .exec(function (err, iaprojects) {
         res.locals.iaprojects = iaprojects;
+
         Project
-          .find()
-          .where('paid')
-          .gt(0)
-          .exec( function(err, allproj) {
-          res.locals.allproj = allproj;
-          return res.render('projects', {projects:projects});
+          .find({ status: 'potential' })
+          .populate('_client')
+          .exec(function (err, pprojects) {
+          res.locals.pprojects = pprojects;
+
+          Project
+            .find({ status: 'neverwas' })
+            .populate('_client')
+            .exec(function (err, nprojects) {
+            res.locals.nprojects = nprojects;
+
+            Project
+              .find()
+              .where('paid')
+              .gt(0)
+              .exec( function(err, allproj) {
+              res.locals.allproj = allproj;
+              return res.render('projects', {projects:projects});
+            });
+          });
         });
-        
     });  
   });
 };

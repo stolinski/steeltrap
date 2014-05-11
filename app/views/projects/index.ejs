@@ -10,12 +10,17 @@
 <h3>Current Projects</h3>
 <%-partial('project',projects)%>
 
+<h3>Potential Projects</h3>
+<%-partial('project',pprojects)%>
+
 <h3>Inactive Projects</h3>
 <%-partial('project',iaprojects)%>
 
+<h3>Neverwas Projects</h3>
+<%-partial('project',nprojects)%>
 
 	
-	
+<% if(allproj){ %>	
 <script>
 	google.setOnLoadCallback(drawChart);
 
@@ -24,14 +29,11 @@
 		var dataTable = new google.visualization.DataTable();
     	dataTable.addColumn({ type: 'date', id: 'Date' });
     	dataTable.addColumn({ type: 'number', id: 'Income' });
-    	dataTable.addRows(
-    		[
-    		<% allproj.forEach(function(proj){ %>
-    			[ new Date(<%= moment(proj.paiddate).format('YYYY') %>,<%= moment(proj.paiddate).format('M') %>,<%= moment(proj.paiddate).format('D') %>),  <%= proj.paid %>],
-    		<% }); %>
-    		]
-    	);
-  
+    	dataTable.addRows([
+    		[new Date(2014, 1, 1), 0],
+    		<% allproj.forEach(function(proj){ if(proj.paiddate) {%>[ new Date(<%= moment(proj.paiddate).format('YYYY') %>,<%= moment(proj.paiddate).format('M') %>,<%= moment(proj.paiddate).format('D') %>),  <%= proj.paid %>],<%} }); 
+    		%>]);
+  		console.log(dataTable);
 
     	var chart = new google.visualization.Calendar(document.getElementById('visualization'));
 
@@ -71,3 +73,4 @@
        chart.draw(dataTable, options);
     };
 </script>
+<% } %>
