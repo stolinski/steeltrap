@@ -24,7 +24,7 @@ exports.index = function (req, res) {
   .exec(function (err, projects) {
 
     Project
-      .find({ status: 'inactive' })
+      .find({ status: 'completed' })
       .populate('_client')
       .exec(function (err, iaprojects) {
         res.locals.iaprojects = iaprojects;
