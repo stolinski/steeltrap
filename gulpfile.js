@@ -1,6 +1,6 @@
 // include gulp
-var gulp = require('gulp'); 
- 
+var gulp = require('gulp');
+
 // include plug-ins
 var jshint = require('gulp-jshint')
 , changed = require('gulp-changed')

@@ -1,10 +1,10 @@
-// ~~~~~~*******#######     ______   _______  _______    _______  ______    _______  _______ 
+// ~~~~~~*******#######     ______   _______  _______    _______  ______    _______  _______
 // ~~~~~~*******#######    |      | |   _   ||       |  |       ||    _ |  |   _   ||       |
 // ~~~~~~*******#######    |  _    ||  |_|  ||_     _|  |_     _||   | ||  |  |_|  ||    _  |
 // ~~~~~~*******#######    | | |   ||       |  |   |      |   |  |   |_||_ |       ||   |_| |
 // ~~~~~~*******#######    | |_|   ||       |  |   |      |   |  |    __  ||       ||    ___|
-// ~~~~~~*******#######    |       ||   _   |  |   |      |   |  |   |  | ||   _   ||   |    
-// ~~~~~~*******#######    |______| |__| |__|  |___|      |___|  |___|  |_||__| |__||___|    
+// ~~~~~~*******#######    |       ||   _   |  |   |      |   |  |   |  | ||   _   ||   |
+// ~~~~~~*******#######    |______| |__| |__|  |___|      |___|  |___|  |_||__| |__||___|
 
 
 
@@ -15,7 +15,7 @@
 
 /**
  * Imports................Brings in FontAwesome, Compass, Toolkit, Breakpoint, Reset, Susy2, Mixins, Variables and Components
- * Components.............Site Components 
+ * Components.............Site Components
  * * Base.................Base Element Styles
  * * Typography...........Base Type Styles
  * * Utility Classes......Reusable Utilities
@@ -82,7 +82,7 @@
 
 .header {
   @include clearfix;
-  background: $dark; 
+  background: $dark;
   color:#eee;
   padding:0 2%;
   position: relative;
@@ -162,15 +162,18 @@ main {
   background: $orange + 20;
   padding-top: 88px;
   z-index: 100;
-  width: 221px;
+  width: 75px;
+  overflow: hidden;
+  @include trans;
   ul {
+    width: 221px;
     margin-top: 40px;
   }
   a {
     display: block;
     color:white;
     text-decoration: none;
-    padding: 15px 40px;
+    padding: 15px 25px;
     @include fs(26px);
     @include trans;
     &:hover {
@@ -181,11 +184,20 @@ main {
       }
     }
     i {
-      margin-right: 10px;
+      margin-right: 30px;
       display: inline-block;
       width: 25px;
       text-align: center;
       @include trans;
+    }
+  }
+  &:hover {
+    width: 221px;
+    a {
+      padding: 15px 20px;
+    }
+    i {
+      margin-right: 10px;
     }
   }
 }
@@ -206,7 +218,7 @@ main {
 /*-- $PROFILE --*/
 
 .profile-container {
-  
+
 }
 
 .profile-type {
@@ -228,7 +240,7 @@ main {
 }
 
 .todo-wrapper {
-  
+
 }
 
 /*-- $CLIENTS --*/
@@ -244,7 +256,7 @@ main {
   @include breakpoint($norm) {
     &:nth-child(odd) {
       margin-right: 2%;
-    }    
+    }
   }
   @include breakpoint($wide) {
     width: 49%;
@@ -267,7 +279,7 @@ main {
   @include border-radius(5px);
   @include box-shadow(1px 1px 4px rgba(black, 0.0));
   @include breakpoint($med) {
-    width: 49%; 
+    width: 49%;
     float: left;
   }
   &:nth-child(odd) {
@@ -304,14 +316,14 @@ main {
     @include box-shadow(1px 1px 4px rgba(black, 0.2));
     @include trans;
   }
-  
+
   .client-details {
     position: relative;
-    z-index: 100;  
+    z-index: 100;
   }
 
   .client-name {
-    margin-bottom: 10px;  
+    margin-bottom: 10px;
     margin-top: 0;
   }
 
@@ -321,11 +333,11 @@ main {
   }
 
   .client-status {
-    text-transform: capitalize;  
+    text-transform: capitalize;
   }
-  
+
   .client-email {
-    margin-bottom: 20px;  
+    margin-bottom: 20px;
   }
 
   .client-options {
@@ -396,7 +408,7 @@ main {
     &:hover {
       color:$dark-blue;
     }
-  }  
+  }
 
   &:hover {
     .client-grav {
@@ -434,7 +446,7 @@ main {
 .project-container {
   padding:15px 1.5%;
   background: white;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
   width: 100%;
   @include clearfix;
   @include border-radius(5px);
@@ -477,7 +489,7 @@ main {
     text-decoration:line-through;
     opacity: 0.5;
     &:before {
-      opacity: 1; 
+      opacity: 1;
     }
   }
 }
@@ -514,5 +526,5 @@ main {
 }
 
 .expense-form {
-  
+
 }
